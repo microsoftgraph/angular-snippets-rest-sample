@@ -28,7 +28,7 @@ The Office 365 unified API exposes multiple APIs from Microsoft cloud services t
 5. Start the development server by running ```node server.js``` in the project's root directory.
 6. Navigate to ```http://127.0.0.1:8080/``` in your web browser.
 
-To learn more about the sample, visit our [understanding the code](https://github.com/OfficeDev/O365-Angular-Unified-API-Snippets/wiki) Wiki page.
+To learn more about the sample, visit our [understanding the code](https://github.com/OfficeDev/O365-Angular-Unified-API-Snippets/wiki/Understanding-the-Snippets-sample-code) Wiki page.
 
 ## Questions and comments
 
