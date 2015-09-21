@@ -36,6 +36,7 @@
 		
 		/**
 		 * Random GUID generator. Copied from Stack Overflow user "broofa".
+		 * http://stackoverflow.com/users/109538/broofa
 		 * http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
 		 */
 		function guid() {

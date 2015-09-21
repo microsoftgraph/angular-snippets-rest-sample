@@ -423,6 +423,7 @@
 		 * Function to create partial functions. Taken
 		 * from Stack Overflow user Jason Bunting.
 		 * 
+		 * http://stackoverflow.com/users/1790/jason-bunting
 		 * http://stackoverflow.com/questions/321113/how-can-i-pre-set-arguments-in-javascript-
 		 * function-call-partial-function-appli/321527#321527
 		 */
