@@ -81,7 +81,7 @@
 		/**
 		 * Add a user to the tenant's users collection.
 		 */
-		function createUser() {
+		function createUser(tenant) {
 			var randomUserName = common.guid();
 			
 			// The data in newUser are the minimum required properties.

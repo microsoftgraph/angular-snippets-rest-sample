@@ -80,7 +80,7 @@
 					$log.debug('Group "' + groupId + '" was created. Updating the group\'s description...');
 
 					var groupUpdates = {
-						description: 'This is a group in the ' + tenant + ' tenant.'
+						description: 'This is a group.'
 					};
 
 					var req = {

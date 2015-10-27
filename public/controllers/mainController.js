@@ -63,7 +63,7 @@
 					'https://graph.microsoft.com/beta/myOrganization/users',
 					true,					
 					function () {
-						doSnippet(users.createUser);
+						doSnippet(partial(users.createUser, tenant));
 					}),
 				new Snippet(
 					'GET me',
@@ -332,6 +332,8 @@
 		/////////////////////////////////////////
 		// End of exposed properties and methods.
 		
+		var tenant;
+		
 		/**
 		 * This function does any initialization work the 
 		 * controller needs.
@@ -339,6 +341,8 @@
 		(function activate() {
 			if (adalAuthenticationService.userInfo.isAuthenticated) {
 				vm.activeSnippet = vm.snippetGroups[0].snippets[0];
+				
+				tenant = adalAuthenticationService.userInfo.userName.split('@')[1];
 			}
 		})();
 		
