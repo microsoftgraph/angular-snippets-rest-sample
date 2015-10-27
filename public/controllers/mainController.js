@@ -177,10 +177,10 @@
 						doSnippet(users.getDirectReports);
 					}),
 				new Snippet(
-					'GET me/userPhoto',
+					'GET me/photo',
 					'Gets the signed-in user\'s photo.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_UserPhoto',
-					common.baseUrl + '/me/userPhoto',
+					common.baseUrl + '/me/photo',
 					false,					
 					function () {
 						doSnippet(users.getUserPhoto);

@@ -93,7 +93,7 @@
 					password: 'p@ssw0rd!',
 					forceChangePasswordNextLogin: false
 				},
-				userPrincipalName: randomUserName + '@contoso.com'
+				userPrincipalName: randomUserName + '@' + tenant
 			};
 
 			var req = {
@@ -278,7 +278,7 @@
 		function getUserPhoto() {
 			var req = {
 				method: 'GET',
-				url: baseUrl + '/me/userPhoto'
+				url: baseUrl + '/me/photo'
 			};
 			
 			return $http(req);
