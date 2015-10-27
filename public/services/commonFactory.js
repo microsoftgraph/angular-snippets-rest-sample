@@ -14,7 +14,7 @@
 		common.Snippet = Snippet;
 		
 		// Properties
-		common.baseUrl = 'https://graph.microsoft.com/beta';
+		common.baseUrl = 'https://graph.microsoft.com/v1.0';
 		
 		// Methods
 		common.guid = guid;

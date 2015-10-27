@@ -93,7 +93,7 @@
 					password: 'p@ssw0rd!',
 					forceChangePasswordNextLogin: false
 				},
-				userPrincipalName: randomUserName + '@' + tenant
+				userPrincipalName: randomUserName + '@contoso.com'
 			};
 
 			var req = {
