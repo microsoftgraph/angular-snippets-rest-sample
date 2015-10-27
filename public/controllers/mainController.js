@@ -147,10 +147,10 @@
 						doSnippet(users.getMessages);
 					}),
 				new Snippet(
-					'POST me/messages/sendMail',
+					'POST me/sendMail',
 					'Sends an email as the signed-in user and saves a copy to their Sent Items folder.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_action_user_sendMail',
-					'https://graph.microsoft.com/beta/me/messages/sendMail',
+					'https://graph.microsoft.com/beta/me/sendMail',
 					false,					
 					function () {
 						doSnippet(partial(users.sendMessage, adalAuthenticationService.userInfo.userName));
