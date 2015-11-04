@@ -159,10 +159,19 @@
 				//          USER/FILES SNIPPETS         //
 				//////////////////////////////////////////
 				new Snippet(
-					'PUT me/drive/root/children/{File.Id}/content',
+					'GET me/drive/root/children',
+					'Gets files from the signed-in user\'s root directory.',
+					'TBD',
+					common.baseUrl + '/me/drive/root/children',	
+					false,				
+					function () {
+						doSnippet(users.getFiles);
+					}),
+				new Snippet(
+					'PUT me/drive/root/children/{FileName}/content',
 					'Creates a file with content in the signed-in user\'s root directory.',
 					'TBD',
-					common.baseUrl + '/me/drive/root/children/{File.Id}/content',	
+					common.baseUrl + '/me/drive/root/children/{FileName}/content',	
 					false,				
 					function () {
 						doSnippet(users.createFile);
