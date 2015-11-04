@@ -26,6 +26,14 @@
 		users.getManager = getManager;
 		users.getDirectReports = getDirectReports;
 		users.getMemberOf = getMemberOf;
+		users.getFiles = getFiles;
+		users.createFile = createFile;
+		users.downloadFile = downloadFile;
+		users.updateFile = updateFile;
+		users.copyFile = copyFile;
+		users.renameFile = renameFile;
+		users.deleteFile = deleteFile;
+		users.createFolder = createFolder;
 		
 		/////////////////////////////////////////
 		// End of exposed properties and methods.
@@ -324,6 +332,62 @@
 			};
 			
 			return $http(req);
+		};
+		
+		/**
+		 * Get signed-in user's files.
+		 */
+		function getFiles() {
+			
+		};
+		
+		/**
+		 * Create a file in signed-in user's root directory.
+		 */
+		function createFile() {
+			
+		};
+		
+		/**
+		 * Get contents of a specific file.
+		 */
+		function downloadFile(fileId) {
+			
+		};
+		
+		/**
+		 * Updates the contents of a specific file.
+		 */
+		function updateFile(fileId) {
+			
+		};
+		
+		/**
+		 * Creates a copy of a specific file.
+		 */
+		function copyFile(fileId) {
+			
+		};
+		
+		/**
+		 * Renames a specific file.
+		 */
+		function renameFile(fileId) {
+			
+		};
+		
+		/**
+		 * Deletes a specific file.
+		 */
+		function deleteFile(fileId) {
+			
+		};
+		
+		/**
+		 * Creates a folder in the root directory.
+		 */
+		function createFolder() {
+			
 		};
 
 		return users;

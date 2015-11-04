@@ -155,6 +155,72 @@
 					function () {
 						doSnippet(partial(users.sendMessage, adalAuthenticationService.userInfo.userName));
 					}),
+				//////////////////////////////////////////
+				//          USER/FILES SNIPPETS         //
+				//////////////////////////////////////////
+				new Snippet(
+					'PUT me/drive/root/children/{File.Id}/content',
+					'Creates a file with content in the signed-in user\'s root directory.',
+					'TBD',
+					common.baseUrl + '/me/drive/root/children/{File.Id}/content',	
+					false,				
+					function () {
+						doSnippet(users.createFile);
+					}),
+				new Snippet(
+					'GET me/drive/items/{File.Id}/content',
+					'Downloads a file.',
+					'TBD',
+					common.baseUrl + '/me/drive/items/{File.Id}/content',	
+					false,				
+					function () {
+						doSnippet(users.downloadFile);
+					}),
+				new Snippet(
+					'PUT me/drive/items/{File.Id}/content',
+					'Updates the contents of a file.',
+					'TBD',
+					common.baseUrl + '/me/drive/items/{File.Id}/content',	
+					false,				
+					function () {
+						doSnippet(users.updateFile);
+					}),
+				new Snippet(
+					'POST me/drive/items/{File.Id}/microsoft.graph.copy',
+					'Creates a copy of a file.',
+					'TBD',
+					common.baseUrl + '/me/drive/items/{File.Id}/microsoft.graph.copy',	
+					false,				
+					function () {
+						doSnippet(users.copyFile);
+					}),
+				new Snippet(
+					'PATCH me/drive/items/{File.Id}',
+					'Renames a file.',
+					'TBD',
+					common.baseUrl + '/me/drive/items/{File.Id}',	
+					false,				
+					function () {
+						doSnippet(users.renameFile);
+					}),
+				new Snippet(
+					'DELETE me/drive/items/{File.Id}',
+					'Deletes a file.',
+					'TBD',
+					common.baseUrl + '/me/drive/items/{File.Id}',	
+					false,				
+					function () {
+						doSnippet(users.deleteFile);
+					}),
+				new Snippet(
+					'POST me/drive/root/children',
+					'Creates a folder in the signed-in user\'s root directory.',
+					'TBD',
+					common.baseUrl + '/me/drive/root/children',	
+					false,				
+					function () {
+						doSnippet(users.createFolder);
+					}),
 				///////////////////////////////////////////////
 				//        MISCELLANEOUS USER SNIPPETS        //
 				///////////////////////////////////////////////
