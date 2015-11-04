@@ -149,8 +149,14 @@
 						Address: 'mara@fabrikam.com'
 					}
 				}],
-				Start: startTime,
-				End: endTime,
+				Start: {
+					'DateTime': startTime,
+					'TimeZone': 'PST'
+				},
+				End: {
+					'DateTime': endTime,
+					'TimeZone': 'PST'
+				},
 				Body: {
 					Content: 'Status updates, blocking issues, and next steps.',
 					ContentType: 'Text'
