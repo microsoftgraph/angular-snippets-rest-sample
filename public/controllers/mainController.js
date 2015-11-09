@@ -10,8 +10,8 @@
 	/**
 	 * The MainController code.
 	 */
-	MainController.$inject = ['$scope', '$q', 'adalAuthenticationService', 'commonFactory', 'usersFactory', 'groupsFactory', 'drivesFactory', 'contactsFactory'];
-	function MainController($scope, $q, adalAuthenticationService, common, users, groups, drives, contacts) {
+	MainController.$inject = ['$scope', '$q', 'adalAuthenticationService', 'commonFactory', 'usersFactory', 'groupsFactory', 'drivesFactory'];
+	function MainController($scope, $q, adalAuthenticationService, common, users, groups, drives) {
 		var vm = this;
 		
 		// Snippet constructor from commonFactory.
@@ -370,35 +370,12 @@
 			]
 		};
 		
-		//////////////////////////////////////////////////
-		// All of the snippets that fall under the      //
-		// 'contacts' tenant-level resource collection. //
-		//////////////////////////////////////////////////
-		var contactsSnippets = {
-			groupTitle: 'contacts',
-			snippets: [
-				///////////////////////////////////
-				//       CONTACTS SNIPPETS       // 
-				///////////////////////////////////				
-				new Snippet(
-					'GET myOrganization/contacts',
-					'Gets all of the contacts in your tenant\'s directory.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_contacts',
-					common.baseUrl + '/myOrganization/contacts',	
-					false,				
-					function () {
-						doSnippet(contacts.getContacts);
-					})
-			]
-		};
-		
 		// Properties
 		vm.activeSnippet;
 		vm.snippetGroups = [
 			usersSnippets,
 			groupsSnippets,
-			drivesSnippets,
-			contactsSnippets
+			drivesSnippets
 		];
 		 
 		// Methods
