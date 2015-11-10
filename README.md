@@ -33,13 +33,13 @@ To learn more about the sample, visit our [understanding the code](https://githu
 
 We'd love to get your feedback about the Office 365 Angular Snippets sample. You can send your questions and suggestions to us in the [Issues](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets/issues) section of this repository.
 
-Questions about Office 365 development in general should be posted to [Stack Overflow](http://stackoverflow.com/questions/tagged/Office365+API). Make sure that your questions or comments are tagged with [Office365] and [API].
+Questions about Office 365 development in general should be posted to [Stack Overflow](http://stackoverflow.com/questions/tagged/Office365+MicrosoftGraph). Make sure that your questions or comments are tagged with [Office365] and [MicrosoftGraph].
   
 ## Additional resources
 
 * [Office Dev Center](http://dev.office.com/)
 * [Microsoft Graph API](http://graph.microsoft.io)
-* [Angular Connect sample using Microsoft Graph](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Connect)
+* [Office 365 Angular Connect sample using Microsoft Graph](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Connect)
 
 ## Copyright
 Copyright (c) 2015 Microsoft. All rights reserved.
