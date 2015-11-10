@@ -1,6 +1,6 @@
-# Office 365 unified API snippets with Angular
+# Microsoft Graph snippets with Angular
 
-The Office 365 unified API exposes multiple APIs from Microsoft cloud services through a single REST API endpoint. This repository shows you how to access multiple resources, including Microsoft Azure Active Directory (AD) and the Office 365 APIs, by making HTTP requests to the Office 365 unified API (preview) in an Angular application. 
+The Microsoft Graph API exposes multiple APIs from Microsoft cloud services through a single REST API endpoint. This repository shows you how to access multiple resources, including Microsoft Azure Active Directory (AD) and the Office 365 APIs, by making HTTP requests to the Microsoft Graph API in an Angular application. 
 
 ![Office 365 Angular Snippets sample screenshot](./README assets/screenshot.jpg)
 
@@ -15,7 +15,7 @@ The Office 365 unified API exposes multiple APIs from Microsoft cloud services t
 * A Microsoft Azure tenant to register your application. Azure Active Directory (AD) provides identity services that applications use for authentication and authorization. A trial subscription can be acquired here: [Microsoft Azure](https://account.windowsazure.com/SignUp).
 
      > Important: You also need to make sure your Azure subscription is bound to your Office 365 tenant. To do this, see the Active Directory team's blog post, [Creating and Managing Multiple Windows Azure Active Directories](http://blogs.technet.com/b/ad/archive/2013/11/08/creating-and-managing-multiple-windows-azure-active-directories.aspx). The section **Adding a new directory** will explain how to do this. You can also see [Set up your Office 365 development environment](https://msdn.microsoft.com/office/office365/howto/setup-development-environment#bk_CreateAzureSubscription) and the section **Associate your Office 365 account with Azure AD to create and manage apps** for more information.
-* A client ID and redirect URI values of an application registered in Azure. This sample must be registered and granted specific permissions for the **Office 365 unified API (preview)**. [Add a web application in Azure](https://msdn.microsoft.com/office/office365/HowTo/add-common-consent-manually#bk_RegisterWebApp) and [grant the proper permissions](https://github.com/OfficeDev/O365-Angular-Unified-API-Snippets/wiki/Grant-permissions-to-the-Snippets-application-in-Azure) to it.
+* A client ID and redirect URI values of an application registered in Azure. This sample must be registered and granted specific permissions for the **Office 365 unified API (preview)**. [Add a web application in Azure](https://msdn.microsoft.com/office/office365/HowTo/add-common-consent-manually#bk_RegisterWebApp) and [grant the proper permissions](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets/wiki/Grant-permissions-to-the-Snippets-application-in-Azure) to it.
 
      > Note: During the app registration process, make sure to specify **http://127.0.0.1:8080/** as the **Sign-on URL**.
 
@@ -27,18 +27,19 @@ The Office 365 unified API exposes multiple APIs from Microsoft cloud services t
 4. Start the development server by running ```node server.js``` in the project's root directory.
 5. Navigate to ```http://127.0.0.1:8080/``` in your web browser.
 
-To learn more about the sample, visit our [understanding the code](https://github.com/OfficeDev/O365-Angular-Unified-API-Snippets/wiki/Understanding-the-Snippets-sample-code) Wiki page.
+To learn more about the sample, visit our [understanding the code](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets/wiki/Understanding-the-Snippets-sample-code) Wiki page.
 
 ## Questions and comments
 
-We'd love to get your feedback about the Office 365 Angular Snippets sample. You can send your questions and suggestions to us in the [Issues](https://github.com/OfficeDev/O365-Angular-Unified-API-Snippets/issues) section of this repository.
+We'd love to get your feedback about the Office 365 Angular Snippets sample. You can send your questions and suggestions to us in the [Issues](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets/issues) section of this repository.
 
 Questions about Office 365 development in general should be posted to [Stack Overflow](http://stackoverflow.com/questions/tagged/Office365+API). Make sure that your questions or comments are tagged with [Office365] and [API].
   
 ## Additional resources
 
-* [Office 365 Angular Connect sample for using unified API](https://github.com/OfficeDev/O365-Angular-Unified-API-Connect)
-* [Office 365 unified API overview (preview)](https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-overview)
+* [Office Dev Center](http://dev.office.com/)
+* [Microsoft Graph API](http://graph.microsoft.io)
+* [Angular Connect sample using Microsoft Graph](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Connect)
 
 ## Copyright
 Copyright (c) 2015 Microsoft. All rights reserved.
