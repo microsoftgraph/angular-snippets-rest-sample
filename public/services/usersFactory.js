@@ -261,7 +261,7 @@
 		function sendMessage(recipientEmailAddress) {
 			var newMessage = {
 				Message: {
-					Subject: 'Unified API snippets',
+					Subject: 'Microsoft Graph snippets',
 					Body: {
 						ContentType: 'Text',
 						Content: 'You can send an email by making a POST request to /me/sendMail.'
