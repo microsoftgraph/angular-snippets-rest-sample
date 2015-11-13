@@ -1,6 +1,6 @@
-# Microsoft Graph snippets with Angular
+# Microsoft Graph API snippets with Angular
 
-The Microsoft Graph API exposes multiple APIs from Microsoft cloud services through a single REST API endpoint. This repository shows you how to access multiple resources, including Microsoft Azure Active Directory (AD) and the Office 365 APIs, by making HTTP requests to the Microsoft Graph API in an Angular application. 
+The Microsoft Graph API (formally known as "unified API (preview)") exposes multiple APIs from Microsoft cloud services through a single REST API endpoint. This repository shows you how to access multiple resources, including Microsoft Azure Active Directory (AD) and the Office 365 APIs, by making HTTP requests to the Microsoft Graph API in an Angular application. 
 
 ![Office 365 Angular Snippets sample screenshot](./README assets/screenshot.jpg)
 
@@ -31,7 +31,7 @@ To learn more about the sample, visit our [understanding the code](https://githu
 
 ## Questions and comments
 
-We'd love to get your feedback about the Microsoft Graph snippets with Angular sample. You can send your questions and suggestions to us in the [Issues](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets/issues) section of this repository.
+We'd love to get your feedback about the Microsoft Graph API snippets with Angular sample. You can send your questions and suggestions to us in the [Issues](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets/issues) section of this repository.
 
 Questions about Office 365 development in general should be posted to [Stack Overflow](http://stackoverflow.com/questions/tagged/Office365+MicrosoftGraph). Make sure that your questions or comments are tagged with [Office365] and [MicrosoftGraph].
   
@@ -39,7 +39,7 @@ Questions about Office 365 development in general should be posted to [Stack Ove
 
 * [Office Dev Center](http://dev.office.com/)
 * [Microsoft Graph API](http://graph.microsoft.io)
-* [Office 365 Angular Connect sample using Microsoft Graph](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Connect)
+* [Office 365 Angular Connect sample using Microsoft Graph API](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Connect)
 
 ## Copyright
 Copyright (c) 2015 Microsoft. All rights reserved.
