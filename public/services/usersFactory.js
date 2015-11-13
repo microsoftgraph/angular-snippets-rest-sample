@@ -98,8 +98,7 @@
 				displayName: 'User ' + randomUserName,
 				mailNickname: randomUserName,
 				passwordProfile: {
-					password: 'p@ssw0rd!',
-					forceChangePasswordNextLogin: false
+					password: 'p@ssw0rd!'
 				},
 				userPrincipalName: randomUserName + '@' + tenant
 			};
@@ -195,7 +194,7 @@
 			createEvent()
 			// If successful, take event ID and update it.
 				.then(function (response) {
-					var eventId = response.data.Id;
+					var eventId = response.data.id;
 
 					var req = {
 						method: 'PATCH',
@@ -225,7 +224,7 @@
 			createEvent()
 			// If successful, take event ID and update it.
 				.then(function (response) {
-					var eventId = response.data.Id;
+					var eventId = response.data.id;
 
 					var req = {
 						method: 'DELETE',
@@ -264,7 +263,7 @@
 					Subject: 'Unified API snippets',
 					Body: {
 						ContentType: 'Text',
-						Content: 'You can send an email by making a POST request to /me/sendMail.'
+						Content: 'You can send an email by making a POST request to /me/microsoft.graph.sendMail.'
 					},
 					ToRecipients: [
 						{
@@ -279,7 +278,7 @@
 
 			var req = {
 				method: 'POST',
-				url: baseUrl + '/me/sendMail',
+				url: baseUrl + '/me/microsoft.graph.sendMail',
 				data: newMessage
 			};
 
