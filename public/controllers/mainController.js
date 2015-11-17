@@ -10,8 +10,8 @@
 	/**
 	 * The MainController code.
 	 */
-	MainController.$inject = ['$scope', '$q', 'adalAuthenticationService', 'commonFactory', 'usersFactory', 'groupsFactory', 'drivesFactory', 'contactsFactory'];
-	function MainController($scope, $q, adalAuthenticationService, common, users, groups, drives, contacts) {
+	MainController.$inject = ['$scope', '$q', 'adalAuthenticationService', 'commonFactory', 'usersFactory', 'groupsFactory', 'drivesFactory'];
+	function MainController($scope, $q, adalAuthenticationService, common, users, groups, drives) {
 		var vm = this;
 		
 		// Snippet constructor from commonFactory.
@@ -42,7 +42,7 @@
 					'GET myOrganization/users',
 					'Gets all of the users in your tenant\'s directory.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User',
-					'https://graph.microsoft.com/beta/myOrganization/users',
+					common.baseUrl + '/myOrganization/users',
 					false,				
 					function () {
 						doSnippet(partial(users.getUsers, false));
@@ -51,7 +51,7 @@
 					'GET myOrganization/users?$filter=country eq \'United States\'',
 					'Gets all of the users in your tenant\'s directory who are from the United States, using $filter.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User',
-					'https://graph.microsoft.com/beta/myOrganization/users?$filter=country eq \'United States\'',
+					common.baseUrl + '/myOrganization/users?$filter=country eq \'United States\'',
 					false,
 					function () {
 						doSnippet(partial(users.getUsers, true));
@@ -60,7 +60,7 @@
 					'POST myOrganization/users',
 					'Adds a new user to the tenant\'s directory.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User',
-					'https://graph.microsoft.com/beta/myOrganization/users',
+					common.baseUrl + '/myOrganization/users',
 					true,					
 					function () {
 						doSnippet(partial(users.createUser, tenant));
@@ -69,7 +69,7 @@
 					'GET me',
 					'Gets information about the signed-in user.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User',
-					'https://graph.microsoft.com/beta/me',
+					common.baseUrl + '/me',
 					false,					
 					function () {
 						doSnippet(partial(users.getMe, false));
@@ -78,7 +78,7 @@
 					'GET me?$select=AboutMe,Responsibilities,Tags',
 					'Gets select information about the signed-in user, using $select.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User',
-					'https://graph.microsoft.com/beta/me?$select=AboutMe,Responsibilities,Tags',	
+					common.baseUrl + '/me?$select=AboutMe,Responsibilities,Tags',	
 					false,				
 					function () {
 						doSnippet(partial(users.getMe, true));
@@ -90,7 +90,7 @@
 					'GET me/drive',
 					'Gets the signed-in user\'s drive.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Drive',
-					'https://graph.microsoft.com/beta/me/drive',
+					common.baseUrl + '/me/drive',
 					false,					
 					function () {
 						doSnippet(users.getDrive);
@@ -102,7 +102,7 @@
 					'GET me/events',
 					'Gets the signed-in user\'s calendar events.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event',
-					'https://graph.microsoft.com/beta/me/events',	
+					common.baseUrl + '/me/events',	
 					false,				
 					function () {
 						doSnippet(users.getEvents);
@@ -111,7 +111,7 @@
 					'POST me/events',
 					'Adds an event to the signed-in user\'s calendar.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event',
-					'https://graph.microsoft.com/beta/me/events',	
+					common.baseUrl + '/me/events',	
 					false,				
 					function () {
 						doSnippet(users.createEvent);
@@ -120,7 +120,7 @@
 					'PATCH me/events/{Event.Id}',
 					'Adds an event to the signed-in user\'s calendar, then updates the subject of the event.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event',
-					'https://graph.microsoft.com/beta/me/events/{Event.Id}',
+					common.baseUrl + '/me/events/{Event.Id}',
 					false,					
 					function () {
 						doSnippet(users.updateEvent);
@@ -129,7 +129,7 @@
 					'DELETE me/events/{Event.Id}',
 					'Adds an event to the signed-in user\'s calendar, then deletes the event.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event',
-					'https://graph.microsoft.com/beta/me/events/{Event.Id}',
+					common.baseUrl + '/me/events/{Event.Id}',
 					false,					
 					function () {
 						doSnippet(users.deleteEvent);
@@ -141,7 +141,7 @@
 					'GET me/messages',
 					'Gets the signed-in user\'s emails.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_Messages',
-					'https://graph.microsoft.com/beta/me/messages',	
+					common.baseUrl + '/me/messages',	
 					false,				
 					function () {
 						doSnippet(users.getMessages);
@@ -150,10 +150,85 @@
 					'POST me/sendMail',
 					'Sends an email as the signed-in user and saves a copy to their Sent Items folder.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_action_user_sendMail',
-					'https://graph.microsoft.com/beta/me/sendMail',
+					common.baseUrl + '/me/sendMail',
 					false,					
 					function () {
 						doSnippet(partial(users.sendMessage, adalAuthenticationService.userInfo.userName));
+					}),
+				//////////////////////////////////////////
+				//          USER/FILES SNIPPETS         //
+				//////////////////////////////////////////
+				new Snippet(
+					'GET me/drive/root/children',
+					'Gets files from the signed-in user\'s root directory.',
+					'TBD',
+					common.baseUrl + '/me/drive/root/children',	
+					false,				
+					function () {
+						doSnippet(users.getFiles);
+					}),
+				new Snippet(
+					'PUT me/drive/root/children/{FileName}/content',
+					'Creates a file with content in the signed-in user\'s root directory.',
+					'TBD',
+					common.baseUrl + '/me/drive/root/children/{FileName}/content',	
+					false,				
+					function () {
+						doSnippet(users.createFile);
+					}),
+				new Snippet(
+					'GET me/drive/items/{File.Id}/content',
+					'Downloads a file.',
+					'TBD',
+					common.baseUrl + '/me/drive/items/{File.Id}/content',	
+					false,				
+					function () {
+						doSnippet(users.downloadFile);
+					}),
+				new Snippet(
+					'PUT me/drive/items/{File.Id}/content',
+					'Updates the contents of a file.',
+					'TBD',
+					common.baseUrl + '/me/drive/items/{File.Id}/content',	
+					false,				
+					function () {
+						doSnippet(users.updateFile);
+					}),
+				new Snippet(
+					'POST me/drive/items/{File.Id}/microsoft.graph.copy',
+					'Creates a copy of a file.',
+					'TBD',
+					common.baseUrl + '/me/drive/items/{File.Id}/microsoft.graph.copy',	
+					false,				
+					function () {
+						doSnippet(users.copyFile);
+					}),
+				new Snippet(
+					'PATCH me/drive/items/{File.Id}',
+					'Renames a file.',
+					'TBD',
+					common.baseUrl + '/me/drive/items/{File.Id}',	
+					false,				
+					function () {
+						doSnippet(users.renameFile);
+					}),
+				new Snippet(
+					'DELETE me/drive/items/{File.Id}',
+					'Deletes a file.',
+					'TBD',
+					common.baseUrl + '/me/drive/items/{File.Id}',	
+					false,				
+					function () {
+						doSnippet(users.deleteFile);
+					}),
+				new Snippet(
+					'POST me/drive/root/children',
+					'Creates a folder in the signed-in user\'s root directory.',
+					'TBD',
+					common.baseUrl + '/me/drive/root/children',	
+					false,				
+					function () {
+						doSnippet(users.createFolder);
 					}),
 				///////////////////////////////////////////////
 				//        MISCELLANEOUS USER SNIPPETS        //
@@ -162,7 +237,7 @@
 					'GET me/manager',
 					'Gets the signed-in user\'s manager.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_manager',
-					'https://graph.microsoft.com/beta/me/manager',
+					common.baseUrl + '/me/manager',
 					false,					
 					function () {
 						doSnippet(users.getManager);
@@ -171,16 +246,16 @@
 					'GET me/directReports',
 					'Gets the signed-in user\'s direct reports.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_directReports',
-					'https://graph.microsoft.com/beta/me/directReports',
+					common.baseUrl + '/me/directReports',
 					false,					
 					function () {
 						doSnippet(users.getDirectReports);
 					}),
 				new Snippet(
-					'GET me/userPhoto',
+					'GET me/photo',
 					'Gets the signed-in user\'s photo.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_UserPhoto',
-					'https://graph.microsoft.com/beta/me/userPhoto',
+					common.baseUrl + '/me/photo',
 					false,					
 					function () {
 						doSnippet(users.getUserPhoto);
@@ -189,7 +264,7 @@
 					'GET me/memberOf',
 					'Gets the groups that the signed-in user is a member of.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_memberOf',
-					'https://graph.microsoft.com/beta/me/memberOf',	
+					common.baseUrl + '/me/memberOf',	
 					false,			
 					function () {
 						doSnippet(users.getMemberOf);
@@ -211,7 +286,7 @@
 					'GET myOrganization/groups',
 					'Gets all of the groups in your tenant\'s directory.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups',
-					'https://graph.microsoft.com/beta/myOrganization/groups',	
+					common.baseUrl + '/myOrganization/groups',	
 					false,				
 					function () {
 						doSnippet(groups.getGroups);
@@ -220,7 +295,7 @@
 					'POST myOrganization/groups',
 					'Adds a new security group to the tenant.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups',
-					'https://graph.microsoft.com/beta/myOrganization/groups',	
+					common.baseUrl + '/myOrganization/groups',	
 					false,				
 					function () {
 						doSnippet(groups.createGroup);
@@ -229,7 +304,7 @@
 					'GET myOrganization/groups/{Group.objectId}',
 					'Gets information about a group in the tenant by ID.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group',
-					'https://graph.microsoft.com/beta/myOrganization/groups/{Group.objectId}',
+					common.baseUrl + '/myOrganization/groups/{Group.objectId}',
 					false,					
 					function () {
 						doSnippet(groups.getGroup);
@@ -238,7 +313,7 @@
 					'PATCH myOrganization/groups/{Group.objectId}',
 					'Adds a new group to the tenant, then updates the description of that group.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group',
-					'https://graph.microsoft.com/beta/myOrganization/groups/{Group.objectId}',
+					common.baseUrl + '/myOrganization/groups/{Group.objectId}',
 					false,				
 					function () {
 						doSnippet(groups.updateGroup);
@@ -247,7 +322,7 @@
 					'DELETE myOrganization/groups/{Group.objectId}',
 					'Adds a new group to the tenant, then deletes the group.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group',
-					'https://graph.microsoft.com/beta/myOrganization/groups/{Group.objectId}',
+					common.baseUrl + '/myOrganization/groups/{Group.objectId}',
 					false,				
 					function () {
 						doSnippet(groups.deleteGroup);
@@ -256,7 +331,7 @@
 					'GET myOrganization/groups/{Group.objectId}/members',
 					'Gets the members of a group.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_members',
-					'https://graph.microsoft.com/beta/myOrganization/groups/{Group.objectId}/members',
+					common.baseUrl + '/myOrganization/groups/{Group.objectId}/members',
 					false,				
 					function () {
 						doSnippet(groups.getMembers);
@@ -265,7 +340,7 @@
 					'GET myOrganization/groups/{Group.objectId}/owners',
 					'Gets the owners of a group.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_owners',
-					'https://graph.microsoft.com/beta/myOrganization/groups/{Group.objectId}/owners',	
+					common.baseUrl + '/myOrganization/groups/{Group.objectId}/owners',	
 					false,			
 					function () {
 						doSnippet(groups.getOwners);
@@ -287,32 +362,10 @@
 					'GET myOrganization/drives',
 					'Gets  all of the drives in your tenant.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_drives',
-					'https://graph.microsoft.com/beta/myOrganization/drives',	
+					common.baseUrl + '/myOrganization/drives',	
 					false,				
 					function () {
 						doSnippet(drives.getDrives);
-					})
-			]
-		};
-		
-		//////////////////////////////////////////////////
-		// All of the snippets that fall under the      //
-		// 'contacts' tenant-level resource collection. //
-		//////////////////////////////////////////////////
-		var contactsSnippets = {
-			groupTitle: 'contacts',
-			snippets: [
-				///////////////////////////////////
-				//       CONTACTS SNIPPETS       // 
-				///////////////////////////////////				
-				new Snippet(
-					'GET myOrganization/contacts',
-					'Gets all of the contacts in your tenant\'s directory.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_contacts',
-					'https://graph.microsoft.com/beta/myOrganization/contacts',	
-					false,				
-					function () {
-						doSnippet(contacts.getContacts);
 					})
 			]
 		};
@@ -322,8 +375,7 @@
 		vm.snippetGroups = [
 			usersSnippets,
 			groupsSnippets,
-			drivesSnippets,
-			contactsSnippets
+			drivesSnippets
 		];
 		 
 		// Methods
@@ -443,7 +495,7 @@
 
 // *********************************************************
 //
-// O365-Angular-Unified-API-Snippets, https://github.com/OfficeDev/O365-Angular-Unified-API-Snippets
+// O365-Angular-Microsoft-Graph-Snippets, https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets
 //
 // Copyright (c) Microsoft Corporation
 // All rights reserved.

@@ -14,7 +14,7 @@
 		common.Snippet = Snippet;
 		
 		// Properties
-		common.baseUrl = 'https://graph.microsoft.com/beta';
+		common.baseUrl = 'https://graph.microsoft.com/v1.0';
 		
 		// Methods
 		common.guid = guid;
@@ -55,7 +55,7 @@
 
 // *********************************************************
 //
-// O365-Angular-Unified-API-Snippets, https://github.com/OfficeDev/O365-Angular-Unified-API-Snippets
+// O365-Angular-Microsoft-Graph-Snippets, https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets
 //
 // Copyright (c) Microsoft Corporation
 // All rights reserved.

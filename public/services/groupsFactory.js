@@ -45,9 +45,9 @@
 
 			var newGroup = {
 				displayName: uuid,
-				mailEnabled: false, // Must be false. This is because only pure security groups can be created using the unified API.
+				mailEnabled: false, // Must be false. This is because only pure security groups can be created using the Microsoft Graph API.
 				mailNickname: uuid,
-				securityEnabled: true // Must be true. This is because only pure security groups can be created using the unified API.
+				securityEnabled: true // Must be true. This is because only pure security groups can be created using the Microsoft Graph API.
 			};
 
 			var req = {
@@ -72,7 +72,7 @@
 		function updateGroup() {
 			var deferred = $q.defer();
 
-			// You can only update groups created via the unified API, so to make sure we have one,
+			// You can only update groups created via the Microsoft Graph API, so to make sure we have one,
 			// we'll create it here and then update its description. 
 			createGroup()
 				.then(function (response) {
@@ -106,7 +106,7 @@
 		function deleteGroup() {
 			var deferred = $q.defer();
 
-			// You can only delete groups created via the unified API, so to make sure we have one,
+			// You can only delete groups created via the Microsoft Graph API, so to make sure we have one,
 			// we'll create it here and then delete its description. 
 			createGroup()
 				.then(function (response) {
@@ -186,7 +186,7 @@
 
 // *********************************************************
 //
-// O365-Angular-Unified-API-Snippets, https://github.com/OfficeDev/O365-Angular-Unified-API-Snippets
+// O365-Angular-Microsoft-Graph-Snippets, https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets
 //
 // Copyright (c) Microsoft Corporation
 // All rights reserved.

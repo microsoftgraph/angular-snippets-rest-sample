@@ -26,6 +26,14 @@
 		users.getManager = getManager;
 		users.getDirectReports = getDirectReports;
 		users.getMemberOf = getMemberOf;
+		users.getFiles = getFiles;
+		users.createFile = createFile;
+		users.downloadFile = downloadFile;
+		users.updateFile = updateFile;
+		users.copyFile = copyFile;
+		users.renameFile = renameFile;
+		users.deleteFile = deleteFile;
+		users.createFolder = createFolder;
 		
 		/////////////////////////////////////////
 		// End of exposed properties and methods.
@@ -149,8 +157,14 @@
 						Address: 'mara@fabrikam.com'
 					}
 				}],
-				Start: startTime,
-				End: endTime,
+				Start: {
+					'DateTime': startTime,
+					'TimeZone': 'PST'
+				},
+				End: {
+					'DateTime': endTime,
+					'TimeZone': 'PST'
+				},
 				Body: {
 					Content: 'Status updates, blocking issues, and next steps.',
 					ContentType: 'Text'
@@ -247,7 +261,7 @@
 		function sendMessage(recipientEmailAddress) {
 			var newMessage = {
 				Message: {
-					Subject: 'Unified API snippets',
+					Subject: 'Microsoft Graph snippets',
 					Body: {
 						ContentType: 'Text',
 						Content: 'You can send an email by making a POST request to /me/sendMail.'
@@ -278,7 +292,7 @@
 		function getUserPhoto() {
 			var req = {
 				method: 'GET',
-				url: baseUrl + '/me/userPhoto'
+				url: baseUrl + '/me/photo'
 			};
 			
 			return $http(req);
@@ -319,6 +333,193 @@
 			
 			return $http(req);
 		};
+		
+		/**
+		 * Get signed-in user's files.
+		 */
+		function getFiles() {
+			var req = {
+				method: 'GET',
+				url: baseUrl + '/me/drive/root/children'
+			};
+			
+			return $http(req);
+		};
+		
+		/**
+		 * Create a file in signed-in user's root directory.
+		 */
+		function createFile() {
+			var randomFileName = common.guid() + '.txt';
+			
+			var req = {
+				method: 'PUT',
+				url: baseUrl + '/me/drive/root/children/' + randomFileName + '/content',
+				data: {
+					content: randomFileName + ' is the name of this file.'
+				}
+			}
+			
+			return $http(req);
+		};
+		
+		/**
+		 * Get contents of a specific file.
+		 */
+		function downloadFile() {
+			var deferred = $q.defer();
+			
+			createFile()
+				.then(function (response) {
+					var fileId = response.data.id;
+					
+					var req = {
+						method: 'GET',
+						url: baseUrl + '/me/drive/items/' + fileId + '/content'
+					};
+
+					deferred.resolve($http(req));
+				}, function (error) {
+					deferred.reject({
+						setupError: 'Unable to create a file to download.',
+						response: error
+					});
+				});
+			
+			return deferred.promise;
+		};
+		
+		/**
+		 * Updates the contents of a specific file.
+		 */
+		function updateFile() {
+			var deferred = $q.defer();
+			
+			createFile()
+				.then(function (response) {
+					var fileId = response.data.id;
+					
+					var req = {
+						method: 'PUT',
+						url: baseUrl + '/me/drive/items/' + fileId + '/content',
+						data: {
+							content: 'Updated file contents.'
+						}
+					};
+
+					deferred.resolve($http(req));
+				}, function (error) {
+					deferred.reject({
+						setupError: 'Unable to create a file to update.',
+						response: error
+					});
+				});
+			
+			return deferred.promise;
+		};
+		
+		/**
+		 * Creates a copy of a specific file.
+		 */
+		function copyFile(fileId) {
+			var deferred = $q.defer();
+			
+			createFile()
+				.then(function (response) {
+					var fileId = response.data.id;
+					var fileName = response.data.name.replace('.txt', '-copy.txt');
+					
+					var req = {
+						method: 'POST',
+						url: baseUrl + '/me/drive/items/' + fileId + '/microsoft.graph.copy',
+						data: {
+							name: fileName
+						}
+					};
+
+					deferred.resolve($http(req));
+				}, function (error) {
+					deferred.reject({
+						setupError: 'Unable to create a file to copy.',
+						response: error
+					});
+				});
+			
+			return deferred.promise;
+		};
+		
+		/**
+		 * Renames a specific file.
+		 */
+		function renameFile(fileId) {
+			var deferred = $q.defer();
+			
+			createFile()
+				.then(function (response) {
+					var fileId = response.data.id;
+					var fileName = response.data.name.replace('.txt', '-renamed.txt');
+					
+					var req = {
+						method: 'PATCH',
+						url: baseUrl + '/me/drive/items/' + fileId,
+						data: {
+							name: fileName
+						}
+					};
+
+					deferred.resolve($http(req));
+				}, function (error) {
+					deferred.reject({
+						setupError: 'Unable to create a file to rename.',
+						response: error
+					});
+				});
+			
+			return deferred.promise;
+		};
+		
+		/**
+		 * Deletes a specific file.
+		 */
+		function deleteFile(fileId) {
+			var deferred = $q.defer();
+			
+			createFile()
+				.then(function (response) {
+					var fileId = response.data.id;
+					
+					var req = {
+						method: 'DELETE',
+						url: baseUrl + '/me/drive/items/' + fileId
+					};
+
+					deferred.resolve($http(req));
+				}, function (error) {
+					deferred.reject({
+						setupError: 'Unable to create a file to delete.',
+						response: error
+					});
+				});
+			
+			return deferred.promise;
+		};
+		
+		/**
+		 * Creates a folder in the root directory.
+		 */
+		function createFolder() {
+			var req = {
+				method: 'POST',
+				url: baseUrl + '/me/drive/root/children',
+				data: {
+					name: common.guid(),
+					folder: {},
+					'@name.conflictBehavior': 'rename'
+				}
+			};
+			
+			return $http(req);
+		};
 
 		return users;
 		}
@@ -326,7 +527,7 @@
 
 // *********************************************************
 //
-// O365-Angular-Unified-API-Snippets, https://github.com/OfficeDev/O365-Angular-Unified-API-Snippets
+// O365-Angular-Microsoft-Graph-Snippets, https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets
 //
 // Copyright (c) Microsoft Corporation
 // All rights reserved.

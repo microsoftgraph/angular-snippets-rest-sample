@@ -28,7 +28,7 @@ console.log('Listening on port ' + port + '...');
 
 // *********************************************************
 //
-// O365-Angular-Unified-API-Snippets, https://github.com/OfficeDev/O365-Angular-Unified-API-Snippets
+// O365-Angular-Microsoft-Graph-Snippets, https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets
 //
 // Copyright (c) Microsoft Corporation
 // All rights reserved.
