@@ -117,19 +117,19 @@
 						doSnippet(users.createEvent);
 					}),
 				new Snippet(
-					'PATCH me/events/{Event.Id}',
+					'PATCH me/events/{Event.id}',
 					'Adds an event to the signed-in user\'s calendar, then updates the subject of the event.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event',
-					common.baseUrl + '/me/events/{Event.Id}',
+					common.baseUrl + '/me/events/{Event.id}',
 					false,					
 					function () {
 						doSnippet(users.updateEvent);
 					}),
 				new Snippet(
-					'DELETE me/events/{Event.Id}',
+					'DELETE me/events/{Event.id}',
 					'Adds an event to the signed-in user\'s calendar, then deletes the event.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event',
-					common.baseUrl + '/me/events/{Event.Id}',
+					common.baseUrl + '/me/events/{Event.id}',
 					false,					
 					function () {
 						doSnippet(users.deleteEvent);
@@ -147,10 +147,10 @@
 						doSnippet(users.getMessages);
 					}),
 				new Snippet(
-					'POST me/sendMail',
+					'POST me/microsoft.graph.sendMail',
 					'Sends an email as the signed-in user and saves a copy to their Sent Items folder.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_action_user_sendMail',
-					common.baseUrl + '/me/sendMail',
+					common.baseUrl + '/me/microsoft.graph.sendMail',
 					false,					
 					function () {
 						doSnippet(partial(users.sendMessage, adalAuthenticationService.userInfo.userName));
@@ -177,46 +177,46 @@
 						doSnippet(users.createFile);
 					}),
 				new Snippet(
-					'GET me/drive/items/{File.Id}/content',
+					'GET me/drive/items/{File.id}/content',
 					'Downloads a file.',
 					'TBD',
-					common.baseUrl + '/me/drive/items/{File.Id}/content',	
+					common.baseUrl + '/me/drive/items/{File.id}/content',	
 					false,				
 					function () {
 						doSnippet(users.downloadFile);
 					}),
 				new Snippet(
-					'PUT me/drive/items/{File.Id}/content',
+					'PUT me/drive/items/{File.id}/content',
 					'Updates the contents of a file.',
 					'TBD',
-					common.baseUrl + '/me/drive/items/{File.Id}/content',	
+					common.baseUrl + '/me/drive/items/{File.id}/content',	
 					false,				
 					function () {
 						doSnippet(users.updateFile);
 					}),
 				new Snippet(
-					'POST me/drive/items/{File.Id}/microsoft.graph.copy',
+					'POST me/drive/items/{File.id}/microsoft.graph.copy',
 					'Creates a copy of a file.',
 					'TBD',
-					common.baseUrl + '/me/drive/items/{File.Id}/microsoft.graph.copy',	
+					common.baseUrl + '/me/drive/items/{File.id}/microsoft.graph.copy',	
 					false,				
 					function () {
 						doSnippet(users.copyFile);
 					}),
 				new Snippet(
-					'PATCH me/drive/items/{File.Id}',
+					'PATCH me/drive/items/{File.id}',
 					'Renames a file.',
 					'TBD',
-					common.baseUrl + '/me/drive/items/{File.Id}',	
+					common.baseUrl + '/me/drive/items/{File.id}',	
 					false,				
 					function () {
 						doSnippet(users.renameFile);
 					}),
 				new Snippet(
-					'DELETE me/drive/items/{File.Id}',
+					'DELETE me/drive/items/{File.id}',
 					'Deletes a file.',
 					'TBD',
-					common.baseUrl + '/me/drive/items/{File.Id}',	
+					common.baseUrl + '/me/drive/items/{File.id}',	
 					false,				
 					function () {
 						doSnippet(users.deleteFile);
@@ -301,46 +301,46 @@
 						doSnippet(groups.createGroup);
 					}),
 				new Snippet(
-					'GET myOrganization/groups/{Group.objectId}',
+					'GET myOrganization/groups/{Group.id}',
 					'Gets information about a group in the tenant by ID.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group',
-					common.baseUrl + '/myOrganization/groups/{Group.objectId}',
+					common.baseUrl + '/myOrganization/groups/{Group.id}',
 					false,					
 					function () {
 						doSnippet(groups.getGroup);
 					}),
 				new Snippet(
-					'PATCH myOrganization/groups/{Group.objectId}',
+					'PATCH myOrganization/groups/{Group.id}',
 					'Adds a new group to the tenant, then updates the description of that group.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group',
-					common.baseUrl + '/myOrganization/groups/{Group.objectId}',
+					common.baseUrl + '/myOrganization/groups/{Group.id}',
 					false,				
 					function () {
 						doSnippet(groups.updateGroup);
 					}),
 				new Snippet(
-					'DELETE myOrganization/groups/{Group.objectId}',
+					'DELETE myOrganization/groups/{Group.id}',
 					'Adds a new group to the tenant, then deletes the group.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group',
-					common.baseUrl + '/myOrganization/groups/{Group.objectId}',
+					common.baseUrl + '/myOrganization/groups/{Group.id}',
 					false,				
 					function () {
 						doSnippet(groups.deleteGroup);
 					}),
 				new Snippet(
-					'GET myOrganization/groups/{Group.objectId}/members',
+					'GET myOrganization/groups/{Group.id}/members',
 					'Gets the members of a group.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_members',
-					common.baseUrl + '/myOrganization/groups/{Group.objectId}/members',
+					common.baseUrl + '/myOrganization/groups/{Group.id}/members',
 					false,				
 					function () {
 						doSnippet(groups.getMembers);
 					}),
 				new Snippet(
-					'GET myOrganization/groups/{Group.objectId}/owners',
+					'GET myOrganization/groups/{Group.id}/owners',
 					'Gets the owners of a group.',
 					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_owners',
-					common.baseUrl + '/myOrganization/groups/{Group.objectId}/owners',	
+					common.baseUrl + '/myOrganization/groups/{Group.id}/owners',	
 					false,			
 					function () {
 						doSnippet(groups.getOwners);

@@ -76,7 +76,7 @@
 			// we'll create it here and then update its description. 
 			createGroup()
 				.then(function (response) {
-					var groupId = response.data.objectId;
+					var groupId = response.data.id;
 					$log.debug('Group "' + groupId + '" was created. Updating the group\'s description...');
 
 					var groupUpdates = {
@@ -110,7 +110,7 @@
 			// we'll create it here and then delete its description. 
 			createGroup()
 				.then(function (response) {
-					var groupId = response.data.objectId;
+					var groupId = response.data.id;
 					$log.debug('Group "' + groupId + '" was created. Deleting the group...');
 
 					var req = {
@@ -155,7 +155,7 @@
 				.then(function (response) {
 					// Check to make sure at least 1 group is returned.
 					if (response.data.value.length >= 1) {
-						var groupId = response.data.value[0].objectId;
+						var groupId = response.data.value[0].id;
 						
 						var req = {
 							method: 'GET',
