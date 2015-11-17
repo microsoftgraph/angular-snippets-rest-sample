@@ -195,15 +195,6 @@
 						doSnippet(users.updateFile);
 					}),
 				new Snippet(
-					'POST me/drive/items/{File.id}/microsoft.graph.copy',
-					'Creates a copy of a file.',
-					'TBD',
-					common.baseUrl + '/me/drive/items/{File.id}/microsoft.graph.copy',	
-					false,				
-					function () {
-						doSnippet(users.copyFile);
-					}),
-				new Snippet(
 					'PATCH me/drive/items/{File.id}',
 					'Renames a file.',
 					'TBD',

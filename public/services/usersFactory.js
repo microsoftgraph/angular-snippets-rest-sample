@@ -30,7 +30,6 @@
 		users.createFile = createFile;
 		users.downloadFile = downloadFile;
 		users.updateFile = updateFile;
-		users.copyFile = copyFile;
 		users.renameFile = renameFile;
 		users.deleteFile = deleteFile;
 		users.createFolder = createFolder;
@@ -410,36 +409,6 @@
 				}, function (error) {
 					deferred.reject({
 						setupError: 'Unable to create a file to update.',
-						response: error
-					});
-				});
-			
-			return deferred.promise;
-		};
-		
-		/**
-		 * Creates a copy of a specific file.
-		 */
-		function copyFile(fileId) {
-			var deferred = $q.defer();
-			
-			createFile()
-				.then(function (response) {
-					var fileId = response.data.id;
-					var fileName = response.data.name.replace('.txt', '-copy.txt');
-					
-					var req = {
-						method: 'POST',
-						url: baseUrl + '/me/drive/items/' + fileId + '/microsoft.graph.copy',
-						data: {
-							name: fileName
-						}
-					};
-
-					deferred.resolve($http(req));
-				}, function (error) {
-					deferred.reject({
-						setupError: 'Unable to create a file to copy.',
 						response: error
 					});
 				});
