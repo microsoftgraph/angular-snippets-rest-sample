@@ -41,7 +41,7 @@
 				new Snippet(
 					'GET myOrganization/users',
 					'Gets all of the users in your tenant\'s directory.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_list',
 					common.baseUrl + '/myOrganization/users',
 					false,				
 					function () {
@@ -50,7 +50,7 @@
 				new Snippet(
 					'GET myOrganization/users?$filter=country eq \'United States\'',
 					'Gets all of the users in your tenant\'s directory who are from the United States, using $filter.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_list',
 					common.baseUrl + '/myOrganization/users?$filter=country eq \'United States\'',
 					false,
 					function () {
@@ -59,7 +59,7 @@
 				new Snippet(
 					'POST myOrganization/users',
 					'Adds a new user to the tenant\'s directory.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_post_users',
 					common.baseUrl + '/myOrganization/users',
 					true,					
 					function () {
@@ -68,7 +68,7 @@
 				new Snippet(
 					'GET me',
 					'Gets information about the signed-in user.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_get',
 					common.baseUrl + '/me',
 					false,					
 					function () {
@@ -77,7 +77,7 @@
 				new Snippet(
 					'GET me?$select=AboutMe,Responsibilities,Tags',
 					'Gets select information about the signed-in user, using $select.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_get',
 					common.baseUrl + '/me?$select=AboutMe,Responsibilities,Tags',	
 					false,				
 					function () {
@@ -89,7 +89,7 @@
 				new Snippet(
 					'GET me/drive',
 					'Gets the signed-in user\'s drive.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Drive',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/drive_get',
 					common.baseUrl + '/me/drive',
 					false,					
 					function () {
@@ -101,7 +101,7 @@
 				new Snippet(
 					'GET me/events',
 					'Gets the signed-in user\'s calendar events.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_events',
 					common.baseUrl + '/me/events',	
 					false,				
 					function () {
@@ -110,7 +110,7 @@
 				new Snippet(
 					'POST me/events',
 					'Adds an event to the signed-in user\'s calendar.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_post_events',
 					common.baseUrl + '/me/events',	
 					false,				
 					function () {
@@ -119,7 +119,7 @@
 				new Snippet(
 					'PATCH me/events/{Event.id}',
 					'Adds an event to the signed-in user\'s calendar, then updates the subject of the event.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/event_update',
 					common.baseUrl + '/me/events/{Event.id}',
 					false,					
 					function () {
@@ -128,7 +128,7 @@
 				new Snippet(
 					'DELETE me/events/{Event.id}',
 					'Adds an event to the signed-in user\'s calendar, then deletes the event.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/event_delete',
 					common.baseUrl + '/me/events/{Event.id}',
 					false,					
 					function () {
@@ -140,7 +140,7 @@
 				new Snippet(
 					'GET me/messages',
 					'Gets the signed-in user\'s emails.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_Messages',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_messages',
 					common.baseUrl + '/me/messages',	
 					false,				
 					function () {
@@ -149,7 +149,7 @@
 				new Snippet(
 					'POST me/microsoft.graph.sendMail',
 					'Sends an email as the signed-in user and saves a copy to their Sent Items folder.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_action_user_sendMail',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_sendmail',
 					common.baseUrl + '/me/microsoft.graph.sendMail',
 					false,					
 					function () {
@@ -161,7 +161,7 @@
 				new Snippet(
 					'GET me/drive/root/children',
 					'Gets files from the signed-in user\'s root directory.',
-					'TBD',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/item_list_children',
 					common.baseUrl + '/me/drive/root/children',	
 					false,				
 					function () {
@@ -170,7 +170,7 @@
 				new Snippet(
 					'PUT me/drive/root/children/{FileName}/content',
 					'Creates a file with content in the signed-in user\'s root directory.',
-					'TBD',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/item_uploadcontent',
 					common.baseUrl + '/me/drive/root/children/{FileName}/content',	
 					false,				
 					function () {
@@ -179,7 +179,7 @@
 				new Snippet(
 					'GET me/drive/items/{File.id}/content',
 					'Downloads a file.',
-					'TBD',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/item_downloadcontent',
 					common.baseUrl + '/me/drive/items/{File.id}/content',	
 					false,				
 					function () {
@@ -188,7 +188,7 @@
 				new Snippet(
 					'PUT me/drive/items/{File.id}/content',
 					'Updates the contents of a file.',
-					'TBD',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/item_downloadcontent',
 					common.baseUrl + '/me/drive/items/{File.id}/content',	
 					false,				
 					function () {
@@ -197,7 +197,7 @@
 				new Snippet(
 					'PATCH me/drive/items/{File.id}',
 					'Renames a file.',
-					'TBD',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/item_update',
 					common.baseUrl + '/me/drive/items/{File.id}',	
 					false,				
 					function () {
@@ -206,7 +206,7 @@
 				new Snippet(
 					'DELETE me/drive/items/{File.id}',
 					'Deletes a file.',
-					'TBD',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/item_delete',
 					common.baseUrl + '/me/drive/items/{File.id}',	
 					false,				
 					function () {
@@ -215,7 +215,7 @@
 				new Snippet(
 					'POST me/drive/root/children',
 					'Creates a folder in the signed-in user\'s root directory.',
-					'TBD',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/item_post_children',
 					common.baseUrl + '/me/drive/root/children',	
 					false,				
 					function () {
@@ -227,7 +227,7 @@
 				new Snippet(
 					'GET me/manager',
 					'Gets the signed-in user\'s manager.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_manager',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_manager',
 					common.baseUrl + '/me/manager',
 					false,					
 					function () {
@@ -236,7 +236,7 @@
 				new Snippet(
 					'GET me/directReports',
 					'Gets the signed-in user\'s direct reports.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_directReports',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_directreports',
 					common.baseUrl + '/me/directReports',
 					false,					
 					function () {
@@ -245,7 +245,7 @@
 				new Snippet(
 					'GET me/photo',
 					'Gets the signed-in user\'s photo.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_UserPhoto',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/profilephoto_get',
 					common.baseUrl + '/me/photo',
 					false,					
 					function () {
@@ -254,7 +254,7 @@
 				new Snippet(
 					'GET me/memberOf',
 					'Gets the groups that the signed-in user is a member of.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_memberOf',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_memberof',
 					common.baseUrl + '/me/memberOf',	
 					false,			
 					function () {
@@ -276,7 +276,7 @@
 				new Snippet(
 					'GET myOrganization/groups',
 					'Gets all of the groups in your tenant\'s directory.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/group_list',
 					common.baseUrl + '/myOrganization/groups',	
 					false,				
 					function () {
@@ -285,7 +285,7 @@
 				new Snippet(
 					'POST myOrganization/groups',
 					'Adds a new security group to the tenant.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/group_post_groups',
 					common.baseUrl + '/myOrganization/groups',	
 					false,				
 					function () {
@@ -294,7 +294,7 @@
 				new Snippet(
 					'GET myOrganization/groups/{Group.id}',
 					'Gets information about a group in the tenant by ID.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/group_get',
 					common.baseUrl + '/myOrganization/groups/{Group.id}',
 					false,					
 					function () {
@@ -303,7 +303,7 @@
 				new Snippet(
 					'PATCH myOrganization/groups/{Group.id}',
 					'Adds a new group to the tenant, then updates the description of that group.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/group_update',
 					common.baseUrl + '/myOrganization/groups/{Group.id}',
 					false,				
 					function () {
@@ -312,7 +312,7 @@
 				new Snippet(
 					'DELETE myOrganization/groups/{Group.id}',
 					'Adds a new group to the tenant, then deletes the group.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/group_delete',
 					common.baseUrl + '/myOrganization/groups/{Group.id}',
 					false,				
 					function () {
@@ -321,7 +321,7 @@
 				new Snippet(
 					'GET myOrganization/groups/{Group.id}/members',
 					'Gets the members of a group.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_members',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/group_list_members',
 					common.baseUrl + '/myOrganization/groups/{Group.id}/members',
 					false,				
 					function () {
@@ -330,7 +330,7 @@
 				new Snippet(
 					'GET myOrganization/groups/{Group.id}/owners',
 					'Gets the owners of a group.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_owners',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/group_list_owners',
 					common.baseUrl + '/myOrganization/groups/{Group.id}/owners',	
 					false,			
 					function () {
@@ -352,7 +352,7 @@
 				new Snippet(
 					'GET myOrganization/drives',
 					'Gets  all of the drives in your tenant.',
-					'https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_drives',
+					'http://graph.microsoft.io/docs/api-reference/v1.0/api/drive_get',
 					common.baseUrl + '/myOrganization/drives',	
 					false,				
 					function () {
