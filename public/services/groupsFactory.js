@@ -45,9 +45,9 @@
 
 			var newGroup = {
 				displayName: uuid,
-				mailEnabled: false, // Must be false. This is because only pure security groups can be created using the Microsoft Graph API.
+				mailEnabled: false, // Set to true for mail-enabled groups.
 				mailNickname: uuid,
-				securityEnabled: true // Must be true. This is because only pure security groups can be created using the Microsoft Graph API.
+				securityEnabled: true // Set to true for security-enabled groups. Do not set this property if creating an Office 365 group.
 			};
 
 			var req = {
