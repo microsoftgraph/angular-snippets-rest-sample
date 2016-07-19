@@ -29,6 +29,13 @@ The Microsoft Graph API (previously called Office 365 unified API) exposes multi
 
 To learn more about the sample, visit our [understanding the code](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets/wiki/Understanding-the-Snippets-sample-code) Wiki page.
 
+<a name="contributing"></a>
+## Contributing ##
+
+If you'd like to contribute to this sample, see [CONTRIBUTING.MD](/CONTRIBUTING.md).
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
 ## Questions and comments
 
 We'd love to get your feedback about the Microsoft Graph API snippets with Angular sample. You can send your questions and suggestions to us in the [Issues](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets/issues) section of this repository.
