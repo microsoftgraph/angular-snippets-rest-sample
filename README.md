@@ -1,4 +1,4 @@
-# Microsoft Graph snippets with Angular
+# Microsoft Graph Snippets Sample for AngularJS
 
 The Microsoft Graph API (previously called Office 365 unified API) exposes multiple APIs from Microsoft cloud services through a single REST API endpoint. This repository shows you how to access multiple resources, including Microsoft Azure Active Directory (AD) and the Office 365 APIs, by making HTTP requests to the Microsoft Graph API in an Angular application. 
 
