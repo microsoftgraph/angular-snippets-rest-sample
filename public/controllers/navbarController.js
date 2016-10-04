@@ -11,13 +11,14 @@
 	/**
 	 * The NavbarController code.
 	 */
-	NavbarController.$inject = ['$log', '$scope', 'adalAuthenticationService'];
-	function NavbarController($log, $scope, adalAuthenticationService) {
+	NavbarController.$inject = ['$log', '$scope', 'authHelper'];
+	function NavbarController($log, $scope, authHelper) {
 		var vm = this;
 		
 		// Properties
 		vm.isCollapsed;
-		vm.isopen = false;	
+		vm.isopen = false;
+		vm.isConnected;
 		
 		// Methods
 		vm.connect = connect;
@@ -32,22 +33,24 @@
 		 */
 		(function activate() {
 			vm.isCollapsed = true;
+			if (hello('aad').getAuthResponse()) vm.isConnected = true;
 		})(); 
 		
 		/**
 		 * Expose the login method to the view.
 		 */
 		function connect() {
-			$log.debug('Connecting to Office 365...');
-			adalAuthenticationService.login();
+			$log.debug('Connecting to Microsoft Graph.');
+			authHelper.login();
 		};
-		
+
 		/**
-		 * Expose the logOut method to the view.
+		 * Expose the logout method to the view.
 		 */
 		function disconnect() {
-			$log.debug('Disconnecting from Office 365...');
-			adalAuthenticationService.logOut();
+			$log.debug('Disconnecting from Microsoft Graph.');
+			vm.isConnected = false;
+			authHelper.logout();
 		};
 
 		/**

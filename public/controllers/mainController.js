@@ -11,12 +11,12 @@
 	/**
 	 * The MainController code.
 	 */
-	MainController.$inject = ['$scope', '$q', 'adalAuthenticationService', 'commonFactory', 'usersFactory', 'groupsFactory', 'drivesFactory'];
-	function MainController($scope, $q, adalAuthenticationService, common, users, groups, drives) {
-		var vm = this;
-		
+	MainController.$inject = ['$scope', 'authHelper', 'commonFactory', 'usersFactory', 'groupsFactory', 'drivesFactory'];
+	function MainController($scope, authHelper, common, users, groups, drives) {
+		let vm = this;
+
 		// Snippet constructor from commonFactory.
-		var Snippet = common.Snippet;
+		let Snippet = common.Snippet;
 		
 		/////////////////////////
 		// Snippet             //
@@ -64,7 +64,7 @@
 					common.baseUrl + '/myOrganization/users',
 					true,					
 					function () {
-						doSnippet(partial(users.createUser, tenant));
+						doSnippet(partial(users.createUser));
 					}),
 				new Snippet(
 					'GET me',
@@ -76,10 +76,10 @@
 						doSnippet(partial(users.getMe, false));
 					}),
 				new Snippet(
-					'GET me?$select=AboutMe,Responsibilities,Tags',
+					'GET me?$select=AboutMe,Responsibilities',
 					'Gets select information about the signed-in user, using $select.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_get',
-					common.baseUrl + '/me?$select=AboutMe,Responsibilities,Tags',	
+					common.baseUrl + '/me?$select=AboutMe,Responsibilities',	
 					false,				
 					function () {
 						doSnippet(partial(users.getMe, true));
@@ -148,13 +148,13 @@
 						doSnippet(users.getMessages);
 					}),
 				new Snippet(
-					'POST me/microsoft.graph.sendMail',
+					'POST me/sendMail',
 					'Sends an email as the signed-in user and saves a copy to their Sent Items folder.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_sendmail',
-					common.baseUrl + '/me/microsoft.graph.sendMail',
+					common.baseUrl + '/me/sendMail',
 					false,					
 					function () {
-						doSnippet(partial(users.sendMessage, adalAuthenticationService.userInfo.userName));
+						doSnippet(partial(users.sendMessage));
 					}),
 				//////////////////////////////////////////
 				//          USER/FILES SNIPPETS         //
@@ -371,30 +371,39 @@
 		];
 		 
 		// Methods
+		vm.isAuthenticated = isAuthenticated;
 		vm.setActive = setActive;
 		
 		/////////////////////////////////////////
 		// End of exposed properties and methods.
-		
-		var tenant;
 		
 		/**
 		 * This function does any initialization work the 
 		 * controller needs.
 		 */
 		(function activate() {
-			if (adalAuthenticationService.userInfo.isAuthenticated) {
-				vm.activeSnippet = vm.snippetGroups[0].snippets[0];
-				
-				tenant = adalAuthenticationService.userInfo.userName.split('@')[1];
+			if (!localStorage.auth) {
+				let auth = hello('aad').getAuthResponse();
+				if (auth !== null) {
+					localStorage.auth = angular.toJson(auth);
+				}
 			}
+			vm.activeSnippet = vm.snippetGroups[0].snippets[0];
 		})();
-		
+
+		function isAuthenticated() {
+			return localStorage.getItem('auth') !== null;
+		}
+
 		/**
 		 * Takes in a snippet, starts animation, executes snippet and handles response,
 		 * then stops animation. 
 		 */
 		function doSnippet(snippet) {
+
+			// Get the access token and attach it to the request.
+			authHelper.getToken();
+
 			// Starts button animation.
 			$scope.laddaLoading = true;
 			
@@ -455,12 +464,14 @@
 		 * Sets class of list item in the sidebar. 
 		 */
 		function setActive(title) {
-			if (!adalAuthenticationService.userInfo.isAuthenticated) {
+			if (vm.isAuthenticated()) {
 				return;
 			}
 
-			if (title === vm.activeSnippet.title) {
-				return 'active';
+			if (vm.activeSnippet !== undefined) {
+				if (title === vm.activeSnippet.title) {
+					return 'active';
+				}
 			}
 			else {
 				return '';
