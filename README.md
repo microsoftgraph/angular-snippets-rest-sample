@@ -24,12 +24,12 @@ The Microsoft Graph API exposes multiple APIs from Microsoft cloud services thro
 5. Enter a friendly name for the application, for example 'MSGraphSnippetsAngular' and select 'Web app/API' as the **Application Type**. For the Sign-on URL, enter *http://127.0.0.1:8080/*. Click on **Create** to create the application.
 6. While still in the Azure portal, choose your application, click on **Settings** and choose **Properties**.
 7. Find the Application ID value and copy it to the clipboard.
-8. Enable your app to use the Implicit grant type.
-  a. Choose the **Manifest** tab above the app details.
-  b. Choose **Edit**, and then set the **oauth2AllowImplicitFlow** property to **true**.
+8. Enable your app to use the Implicit grant type.  
+  a. Choose the **Manifest** tab above the app details.  
+  b. Choose **Edit**, and then set the **oauth2AllowImplicitFlow** property to **true**.  
   c. Choose **Save**.
-9. Configure Permissions for your application:
-  a. In the **Settings** menu, choose the **Required permissions** section, click on **Add**, then **Select an API**, and select **Microsoft Graph**.
+9. Configure Permissions for your application:  
+  a. In the **Settings** menu, choose the **Required permissions** section, click on **Add**, then **Select an API**, and select **Microsoft Graph**.  
   b. Click on Select Permissions. Select the following delegated permissions and then choose **Done**.
 
    - Read and write access to user profile
