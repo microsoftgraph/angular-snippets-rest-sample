@@ -97,27 +97,35 @@
 				.then(function(response) {
 
 					let tenant = response.data.value[0];
-					let domainName = tenant.verifiedDomains[0].name;
-					
-					// Then define the new user. The data in newUser are the minimum required properties.
-					var randomUserName = common.guid();
-					var newUser = {
-						accountEnabled: true,
-						displayName: 'User ' + randomUserName,
-						mailNickname: randomUserName,
-						passwordProfile: {
-							password: 'p@ssw0rd!'
-						},
-						userPrincipalName: randomUserName + '@' + domainName
-					};
+					if (!angular.isUndefined(tenant)) {
+						let domainName = tenant.verifiedDomains[0].name;
+						
+						// Then define the new user. The data in newUser are the minimum required properties.
+						var randomUserName = common.guid();
+						var newUser = {
+							accountEnabled: true,
+							displayName: 'User ' + randomUserName,
+							mailNickname: randomUserName,
+							passwordProfile: {
+								password: 'p@ssw0rd!'
+							},
+							userPrincipalName: randomUserName + '@' + domainName
+						};
 
-					var req = {
-						method: 'POST',
-						url: baseUrl + '/myOrganization/users',
-						data: newUser
-					};
+						var req = {
+							method: 'POST',
+							url: baseUrl + '/myOrganization/users',
+							data: newUser
+						};
 
-					deferred.resolve($http(req));
+						deferred.resolve($http(req));
+					} 
+					else {
+						deferred.reject({
+							setupError: 'Unable to create a user.',
+							response: {statusText:'No tenant found for this account.'}
+						});
+					}
 				}, function (error) {
 					deferred.reject({
 						setupError: 'Unable to create a user.',
