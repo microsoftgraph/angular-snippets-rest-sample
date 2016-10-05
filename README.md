@@ -11,7 +11,7 @@ The Microsoft Graph API exposes multiple APIs from Microsoft cloud services thro
 ## Prerequisites
 
 * [Node.js](https://nodejs.org/). Node is required to run the sample on a development server and to install dependencies. 
-* An Office 365 account. You can sign up for [an Office 365 Developer subscription](https://aka.ms/devprogramsignup) that includes the resources that you need to start building Office 365 apps.
+* An Office 365 admin account. You can sign up for [an Office 365 Developer subscription](https://aka.ms/devprogramsignup) that includes the resources that you need to start building Office 365 apps.
 
      > Note: If you already have a subscription, the previous link sends you to a page with the message *Sorry, you can’t add that to your current account*. In that case use an account from your current Office 365 subscription.
 
@@ -24,19 +24,23 @@ The Microsoft Graph API exposes multiple APIs from Microsoft cloud services thro
 5. Enter a friendly name for the application, for example 'MSGraphSnippetsAngular' and select 'Web app/API' as the **Application Type**. For the Sign-on URL, enter *http://127.0.0.1:8080/*. Click on **Create** to create the application.
 6. While still in the Azure portal, choose your application, click on **Settings** and choose **Properties**.
 7. Find the Application ID value and copy it to the clipboard.
-8. Configure Permissions for your application:
-9. In the **Settings** menu, choose the **Required permissions** section, click on **Add**, then **Select an API**, and select **Microsoft Graph**.
-10. Then, click on Select Permissions. Select the following delegated permissions and then choose **Done**.
+8. Enable your app to use the Implicit grant type.
+  a. Choose the **Manifest** tab above the app details.
+  b. Choose **Edit**, and then set the **oauth2AllowImplicitFlow** property to **true**.
+  c. Choose **Save**.
+9. Configure Permissions for your application:
+  a. In the **Settings** menu, choose the **Required permissions** section, click on **Add**, then **Select an API**, and select **Microsoft Graph**.
+  b. Click on Select Permissions. Select the following delegated permissions and then choose **Done**.
 
-  - Read and write access to user profile
-  - Read all user' full profiles
-  - Read and write directory data
-  - Access directory data as the signed in user
-  - Read user mail
-  - Send mail as user
-  - Have full access to user calendars
-  - Read user contacts
-  - Have full access to user files
+   - Read and write access to user profile
+   - Read all user' full profiles
+   - Read and write directory data
+   - Access directory data as the signed in user
+   - Read user mail
+   - Send mail as user
+   - Have full access to user calendars
+   - Read user contacts
+   - Have full access to user files
 
 ## Configure and run the app
 
@@ -44,9 +48,9 @@ The Microsoft Graph API exposes multiple APIs from Microsoft cloud services thro
 2. Replace *{your_app_client_ID}* with the client ID of your registered Azure application.
 3. Install project dependencies with Node's package manager (npm) by running ```npm install``` in the project's root directory on the command line.
 4. Start the development server by running ```node server.js``` in the project's root directory.
-5. Navigate to ```http://127.0.0.1:8080/``` in your web browser.
+5. Navigate to ```http://127.0.0.1:8080/``` in your web browser and sign in to the app using your Office 365 admin credentials.
 
-## Understanding the sample
+## Understanding the app
 
 This sample demonstrates several concepts including:
 
