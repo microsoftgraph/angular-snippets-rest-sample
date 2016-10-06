@@ -58,7 +58,7 @@
 						doSnippet(partial(users.getUsers, true));
 					}),
 				new Snippet(
-					'POST myOrganization/users',
+					'POST myOrganization/users *',
 					'Adds a new user to the tenant\'s directory.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_post_users',
 					common.baseUrl + '/myOrganization/users',
@@ -76,7 +76,7 @@
 						doSnippet(partial(users.getMe, false));
 					}),
 				new Snippet(
-					'GET me?$select=AboutMe,Responsibilities',
+					'GET me?$select=AboutMe,Responsibilities *',
 					'Gets select information about the signed-in user, using $select.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_get',
 					common.baseUrl + '/me?$select=AboutMe,Responsibilities',	
@@ -226,7 +226,7 @@
 				//        MISCELLANEOUS USER SNIPPETS        //
 				///////////////////////////////////////////////
 				new Snippet(
-					'GET me/manager',
+					'GET me/manager *',
 					'Gets the signed-in user\'s manager.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_manager',
 					common.baseUrl + '/me/manager',
@@ -235,7 +235,7 @@
 						doSnippet(users.getManager);
 					}),
 				new Snippet(
-					'GET me/directReports',
+					'GET me/directReports *',
 					'Gets the signed-in user\'s direct reports.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_directreports',
 					common.baseUrl + '/me/directReports',
@@ -244,7 +244,7 @@
 						doSnippet(users.getDirectReports);
 					}),
 				new Snippet(
-					'GET me/photo',
+					'GET me/photo *',
 					'Gets the signed-in user\'s photo.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/profilephoto_get',
 					common.baseUrl + '/me/photo',
@@ -253,7 +253,7 @@
 						doSnippet(users.getUserPhoto);
 					}),
 				new Snippet(
-					'GET me/memberOf',
+					'GET me/memberOf *',
 					'Gets the groups that the signed-in user is a member of.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_memberof',
 					common.baseUrl + '/me/memberOf',	
@@ -284,7 +284,7 @@
 						doSnippet(groups.getGroups);
 					}),
 				new Snippet(
-					'POST myOrganization/groups',
+					'POST myOrganization/groups *',
 					'Adds a new security group to the tenant.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/group_post_groups',
 					common.baseUrl + '/myOrganization/groups',	
@@ -302,7 +302,7 @@
 						doSnippet(groups.getGroup);
 					}),
 				new Snippet(
-					'PATCH myOrganization/groups/{Group.id}',
+					'PATCH myOrganization/groups/{Group.id} *',
 					'Adds a new group to the tenant, then updates the description of that group.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/group_update',
 					common.baseUrl + '/myOrganization/groups/{Group.id}',
@@ -311,7 +311,7 @@
 						doSnippet(groups.updateGroup);
 					}),
 				new Snippet(
-					'DELETE myOrganization/groups/{Group.id}',
+					'DELETE myOrganization/groups/{Group.id} *',
 					'Adds a new group to the tenant, then deletes the group.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/group_delete',
 					common.baseUrl + '/myOrganization/groups/{Group.id}',

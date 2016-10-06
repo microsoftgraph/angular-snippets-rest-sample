@@ -65,6 +65,8 @@ bower install hello
 
 8. Choose a snippet from the left-hand navigation pane, and then choose the **Run snippet** button. The request and response display in the center pane.
 
+>**Note** Operations that are not supported for Microsoft Accounts are marked with an asterisk.
+
 ### How the sample affects your data
 
 This sample runs REST commands that create, read, update, or delete data. The sample creates fake entities so that your actual tenant data is unaffected. The sample will leave behind the fake entities that it creates.
