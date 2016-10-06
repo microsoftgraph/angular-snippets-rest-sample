@@ -1,5 +1,6 @@
-/*
-* Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
+/* 
+*  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. 
+*  See LICENSE in the source repository root for complete license information. 
 */
 
 (function () {
@@ -10,12 +11,12 @@
 	/**
 	 * The MainController code.
 	 */
-	MainController.$inject = ['$scope', '$q', 'adalAuthenticationService', 'commonFactory', 'usersFactory', 'groupsFactory', 'drivesFactory'];
-	function MainController($scope, $q, adalAuthenticationService, common, users, groups, drives) {
-		var vm = this;
-		
+	MainController.$inject = ['$scope', 'authHelper', 'commonFactory', 'usersFactory', 'groupsFactory', 'drivesFactory'];
+	function MainController($scope, authHelper, common, users, groups, drives) {
+		let vm = this;
+
 		// Snippet constructor from commonFactory.
-		var Snippet = common.Snippet;
+		let Snippet = common.Snippet;
 		
 		/////////////////////////
 		// Snippet             //
@@ -57,13 +58,13 @@
 						doSnippet(partial(users.getUsers, true));
 					}),
 				new Snippet(
-					'POST myOrganization/users',
+					'POST myOrganization/users *',
 					'Adds a new user to the tenant\'s directory.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_post_users',
 					common.baseUrl + '/myOrganization/users',
 					true,					
 					function () {
-						doSnippet(partial(users.createUser, tenant));
+						doSnippet(partial(users.createUser));
 					}),
 				new Snippet(
 					'GET me',
@@ -75,10 +76,10 @@
 						doSnippet(partial(users.getMe, false));
 					}),
 				new Snippet(
-					'GET me?$select=AboutMe,Responsibilities,Tags',
+					'GET me?$select=AboutMe,Responsibilities *',
 					'Gets select information about the signed-in user, using $select.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_get',
-					common.baseUrl + '/me?$select=AboutMe,Responsibilities,Tags',	
+					common.baseUrl + '/me?$select=AboutMe,Responsibilities',	
 					false,				
 					function () {
 						doSnippet(partial(users.getMe, true));
@@ -147,13 +148,13 @@
 						doSnippet(users.getMessages);
 					}),
 				new Snippet(
-					'POST me/microsoft.graph.sendMail',
+					'POST me/sendMail',
 					'Sends an email as the signed-in user and saves a copy to their Sent Items folder.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_sendmail',
-					common.baseUrl + '/me/microsoft.graph.sendMail',
+					common.baseUrl + '/me/sendMail',
 					false,					
 					function () {
-						doSnippet(partial(users.sendMessage, adalAuthenticationService.userInfo.userName));
+						doSnippet(partial(users.sendMessage));
 					}),
 				//////////////////////////////////////////
 				//          USER/FILES SNIPPETS         //
@@ -225,7 +226,7 @@
 				//        MISCELLANEOUS USER SNIPPETS        //
 				///////////////////////////////////////////////
 				new Snippet(
-					'GET me/manager',
+					'GET me/manager *',
 					'Gets the signed-in user\'s manager.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_manager',
 					common.baseUrl + '/me/manager',
@@ -234,7 +235,7 @@
 						doSnippet(users.getManager);
 					}),
 				new Snippet(
-					'GET me/directReports',
+					'GET me/directReports *',
 					'Gets the signed-in user\'s direct reports.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_directreports',
 					common.baseUrl + '/me/directReports',
@@ -243,7 +244,7 @@
 						doSnippet(users.getDirectReports);
 					}),
 				new Snippet(
-					'GET me/photo',
+					'GET me/photo *',
 					'Gets the signed-in user\'s photo.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/profilephoto_get',
 					common.baseUrl + '/me/photo',
@@ -252,7 +253,7 @@
 						doSnippet(users.getUserPhoto);
 					}),
 				new Snippet(
-					'GET me/memberOf',
+					'GET me/memberOf *',
 					'Gets the groups that the signed-in user is a member of.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_memberof',
 					common.baseUrl + '/me/memberOf',	
@@ -283,7 +284,7 @@
 						doSnippet(groups.getGroups);
 					}),
 				new Snippet(
-					'POST myOrganization/groups',
+					'POST myOrganization/groups *',
 					'Adds a new security group to the tenant.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/group_post_groups',
 					common.baseUrl + '/myOrganization/groups',	
@@ -301,7 +302,7 @@
 						doSnippet(groups.getGroup);
 					}),
 				new Snippet(
-					'PATCH myOrganization/groups/{Group.id}',
+					'PATCH myOrganization/groups/{Group.id} *',
 					'Adds a new group to the tenant, then updates the description of that group.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/group_update',
 					common.baseUrl + '/myOrganization/groups/{Group.id}',
@@ -310,7 +311,7 @@
 						doSnippet(groups.updateGroup);
 					}),
 				new Snippet(
-					'DELETE myOrganization/groups/{Group.id}',
+					'DELETE myOrganization/groups/{Group.id} *',
 					'Adds a new group to the tenant, then deletes the group.',
 					'http://graph.microsoft.io/docs/api-reference/v1.0/api/group_delete',
 					common.baseUrl + '/myOrganization/groups/{Group.id}',
@@ -370,30 +371,39 @@
 		];
 		 
 		// Methods
+		vm.isAuthenticated = isAuthenticated;
 		vm.setActive = setActive;
 		
 		/////////////////////////////////////////
 		// End of exposed properties and methods.
-		
-		var tenant;
 		
 		/**
 		 * This function does any initialization work the 
 		 * controller needs.
 		 */
 		(function activate() {
-			if (adalAuthenticationService.userInfo.isAuthenticated) {
-				vm.activeSnippet = vm.snippetGroups[0].snippets[0];
-				
-				tenant = adalAuthenticationService.userInfo.userName.split('@')[1];
+			if (!localStorage.auth) {
+				let auth = hello('aad').getAuthResponse();
+				if (auth !== null) {
+					localStorage.auth = angular.toJson(auth);
+				}
 			}
+			vm.activeSnippet = vm.snippetGroups[0].snippets[0];
 		})();
-		
+
+		function isAuthenticated() {
+			return localStorage.getItem('auth') !== null;
+		}
+
 		/**
 		 * Takes in a snippet, starts animation, executes snippet and handles response,
 		 * then stops animation. 
 		 */
 		function doSnippet(snippet) {
+
+			// Get the access token and attach it to the request.
+			authHelper.getToken();
+
 			// Starts button animation.
 			$scope.laddaLoading = true;
 			
@@ -454,12 +464,14 @@
 		 * Sets class of list item in the sidebar. 
 		 */
 		function setActive(title) {
-			if (!adalAuthenticationService.userInfo.isAuthenticated) {
+			if (vm.isAuthenticated()) {
 				return;
 			}
 
-			if (title === vm.activeSnippet.title) {
-				return 'active';
+			if (vm.activeSnippet !== undefined) {
+				if (title === vm.activeSnippet.title) {
+					return 'active';
+				}
 			}
 			else {
 				return '';
@@ -483,32 +495,3 @@
 		};
 	};
 })();
-
-// *********************************************************
-//
-// O365-Angular-Microsoft-Graph-Snippets, https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets
-//
-// Copyright (c) Microsoft Corporation
-// All rights reserved.
-//
-// MIT License:
-// Permission is hereby granted, free of charge, to any person obtaining
-// a copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
-//
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-//
-// *********************************************************

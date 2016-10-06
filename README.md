@@ -1,59 +1,102 @@
-# Microsoft Graph snippets with Angular
+# Microsoft Graph Snippets Sample for AngularJS (REST)
 
-The Microsoft Graph API (previously called Office 365 unified API) exposes multiple APIs from Microsoft cloud services through a single REST API endpoint. This repository shows you how to access multiple resources, including Microsoft Azure Active Directory (AD) and the Office 365 APIs, by making HTTP requests to the Microsoft Graph API in an Angular application. 
+## Table of contents
 
-![Office 365 Angular Snippets sample screenshot](./README assets/screenshot.jpg)
+* [Prerequisites](#prerequisites)
+* [Register the application](#register-the-application)
+* [Build and run the sample](#build-and-run-the-sample)
+* [Code of note](#code-of-note)
+* [Questions and comments](#questions-and-comments)
+* [Contributing](#contributing)
+* [Additional resources](#additional-resources)
 
-**Note: If possible, please use this sample with a "non-work" or test account in Office 365. With the current version of the project, it does not clean up the created objects in your mailbox, calendar, contacts, and objects created from additional operations. At this time you'll have to manually remove these artifacts, for example, sample mails, contacts, and calendar events.**  
+This sample shows how to use the Microsoft Graph API to send email, manage groups, and perform other activities. Microsoft Graph exposes multiple APIs from Microsoft cloud services through a single REST API endpoint. This repository shows you how to access multiple resources, including Microsoft Azure Active Directory (AD) and the Office 365 APIs, by making HTTP requests to Microsoft Graph in an AngularJS app. The sample uses the Azure AD v2.0 endpoint, which supports Microsoft Accounts and work or school Office 365 accounts.
+
+![Microsoft Graph Snippets sample screenshot](./README assets/screenshot.jpg)
+
+**Note:** This sample does not always clean up the entities that it creates, so you might want to use a test account to run the sample.
 
 ## Prerequisites
 
 * [Node.js](https://nodejs.org/). Node is required to run the sample on a development server and to install dependencies. 
-* An Office 365 account. You can sign up for [an Office 365 Developer subscription](https://aka.ms/devprogramsignup) that includes the resources that you need to start building Office 365 apps.
 
-     > Note: If you already have a subscription, the previous link sends you to a page with the message *Sorry, you can’t add that to your current account*. In that case use an account from your current Office 365 subscription.
+* [Bower](https://bower.io). Bower is required to install front-end dependencies.
 
-## Register the app
+* Either a [Microsoft account](https://www.outlook.com) or [work or school account](http://dev.office.com/devprogram) (admin)
 
-1. Sign in to the [Azure portal](https://portal.azure.com/).
-2. On the top bar, click on your account and under the **Directory** list, choose the Active Directory tenant where you wish to register your application.
-3. Click on **More Services** in the left hand nav, and choose **Azure Active Directory**.
-4. Click on **App registrations** and choose **Add**.
-5. Enter a friendly name for the application, for example 'MSGraphConnectAngular' and select 'Web app/API' as the **Application Type**. For the Sign-on URL, enter *http://127.0.0.1:8080/*. Click on **Create** to create the application.
-6. While still in the Azure portal, choose your application, click on **Settings** and choose **Properties**.
-7. Find the Application ID value and copy it to the clipboard.
-8. Configure Permissions for your application:
-9. In the **Settings** menu, choose the **Required permissions** section, click on **Add**, then **Select an API**, and select **Microsoft Graph**.
-10. Then, click on Select Permissions and select **Sign in and read user profile** and **Send mail as a user**. Click **Select** and then **Done**.
+## Register the application
 
-## Configure and run the app
+1. Sign into the [App Registration Portal](https://apps.dev.microsoft.com/) using either your personal or work or school account.
 
-1. Using your favorite IDE, open **config.js** in *public/scripts*.
-2. Replace *{your_app_client_ID}* with the client ID of your registered Azure application.
-3. Install project dependencies with Node's package manager (npm) by running ```npm install``` in the project's root directory on the command line.
-4. Start the development server by running ```node server.js``` in the project's root directory.
-5. Navigate to ```http://127.0.0.1:8080/``` in your web browser.
+2. Choose **Add an app**.
 
-To learn more about the sample, visit our [understanding the code](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets/wiki/Understanding-the-Snippets-sample-code) Wiki page.
+3. Enter a name for the app, and choose **Create application**.
+	
+	The registration page displays, listing the properties of your app.
+ 
+4. Copy the application ID. This is the unique identifier for your app that you'll use to configure the sample.
 
-<a name="contributing"></a>
-## Contributing ##
+5. Under **Platforms**, choose **Add Platform** > **Web**.
+
+6. Make sure the **Allow Implicit Flow** check box is selected, and enter *http://localhost:8080* as the Redirect URI. 
+
+7. Choose **Save**.
+
+## Build and run the sample
+
+1. Download or clone the Microsoft Graph Snippets Sample for AngularJS.
+
+2. Using your favorite IDE, open **config.js** in *public/scripts*.
+
+3. Replace the **appId** placeholder value with the application ID of your registered Azure application.
+
+4. In a command prompt, run the following commands in the sample's root directory. This installs project dependencies, including the [HelloJS](http://adodson.com/hello.js/) client-side authentication library.
+
+  ```
+npm install
+bower install hello
+  ```
+  
+5. Run `npm start` to start the development server.
+
+6. Navigate to `http://localhost:8080` in your web browser.
+
+7. Sign in with your personal or admin work or school account and grant the requested permissions.
+
+8. Choose a snippet from the left-hand navigation pane, and then choose the **Run snippet** button. The request and response display in the center pane.
+
+>**Note** Operations that are not supported for Microsoft Accounts are marked with an asterisk.
+
+### How the sample affects your data
+
+This sample runs REST commands that create, read, update, or delete data. The sample creates fake entities so that your actual tenant data is unaffected. The sample will leave behind the fake entities that it creates.
+
+## Code of note
+
+public/scripts/aad.js - Contains HelloJS configuration properties for the Azure AD provider.  
+public/scripts/config.js - Contains the constants used for authentication parameters.  
+public/services/authHelper.js - Initializes the HelloJS provider, calls the login and logout methods exposed by HelloJS, and gets the token from local storage and adds it to the HTTP request.  
+public/services/<resource>Factory.js - Constructs the HTTP requests for Microsoft Graph.  
+public/controllers/mainController.js - Gets snippets from the factories, and parses the responses from Microsoft Graph.
+
+>**Note** The simple authentication and token handling in this project is for sample purposes only. In a production app, you should construct a more robust way of handling authentication, including validation and secure token handling.
+
+## Questions and comments
+
+We'd love to get your feedback about the Microsoft Graph Snippets Sample for AngularJS. You can send your questions and suggestions to us in the [Issues](https://github.com/microsoftgraph/angular-snippets-rest-sample/issues) section of this repository.
+
+For general questions about Microsoft Graph development, connect with us on [Stack Overflow](http://stackoverflow.com/questions/tagged/microsoftgraph). Tag your questions with [MicrosoftGraph].
+
+## Contributing
 
 If you'd like to contribute to this sample, see [CONTRIBUTING.MD](/CONTRIBUTING.md).
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-## Questions and comments
-
-We'd love to get your feedback about the Microsoft Graph API snippets with Angular sample. You can send your questions and suggestions to us in the [Issues](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets/issues) section of this repository.
-
-Your feedback is important to us. Connect with us on [Stack Overflow](http://stackoverflow.com/questions/tagged/office365+or+microsoftgraph). Tag your questions with [MicrosoftGraph] and [office365].
-  
 ## Additional resources
 
-* [Office Dev Center](http://dev.office.com/)
-* [Microsoft Graph API](http://graph.microsoft.io)
-* [Office 365 Angular Connect sample using Microsoft Graph API](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Connect)
+* [Microsoft Graph](http://graph.microsoft.io)
+* [Other Microsoft Graph samples for AngularJS](https://github.com/microsoftgraph?utf8=%E2%9C%93&query=angular)
 
 ## Copyright
-Copyright (c) 2015 Microsoft. All rights reserved.
+Copyright (c) 2016 Microsoft. All rights reserved.

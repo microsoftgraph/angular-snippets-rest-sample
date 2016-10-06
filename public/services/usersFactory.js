@@ -1,5 +1,6 @@
-/*
-* Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
+/* 
+*  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. 
+*  See LICENSE in the source repository root for complete license information. 
 */
 
 (function () {
@@ -47,7 +48,7 @@
 
 			// Append $select OData query string.
 			if (useSelect) {
-				reqUrl += '?$select=AboutMe,Responsibilities,Tags'
+				reqUrl += '?$select=AboutMe,Responsibilities'
 			}
 
 			var req = {
@@ -88,27 +89,51 @@
 		/**
 		 * Add a user to the tenant's users collection.
 		 */
-		function createUser(tenant) {
-			var randomUserName = common.guid();
+		function createUser() {
+			var deferred = $q.defer();
+
+			// First get the tenant name for the new user.
+			getOrganization()
+				.then(function(response) {
+
+					let tenant = response.data.value[0];
+					if (!angular.isUndefined(tenant)) {
+						let domainName = tenant.verifiedDomains[0].name;
+						
+						// Then define the new user. The data in newUser are the minimum required properties.
+						var randomUserName = common.guid();
+						var newUser = {
+							accountEnabled: true,
+							displayName: 'User ' + randomUserName,
+							mailNickname: randomUserName,
+							passwordProfile: {
+								password: 'p@ssw0rd!'
+							},
+							userPrincipalName: randomUserName + '@' + domainName
+						};
+
+						var req = {
+							method: 'POST',
+							url: baseUrl + '/myOrganization/users',
+							data: newUser
+						};
+
+						deferred.resolve($http(req));
+					} 
+					else {
+						deferred.reject({
+							setupError: 'Unable to create a user.',
+							response: {statusText:'No tenant found for this account.'}
+						});
+					}
+				}, function (error) {
+					deferred.reject({
+						setupError: 'Unable to create a user.',
+						response: error
+					});
+				});
 			
-			// The data in newUser are the minimum required properties.
-			var newUser = {
-				accountEnabled: true,
-				displayName: 'User ' + randomUserName,
-				mailNickname: randomUserName,
-				passwordProfile: {
-					password: 'p@ssw0rd!'
-				},
-				userPrincipalName: randomUserName + '@' + tenant
-			};
-
-			var req = {
-				method: 'POST',
-				url: baseUrl + '/myOrganization/users',
-				data: newUser
-			};
-
-			return $http(req);
+			return deferred.promise;
 		};
 		
 		/**
@@ -256,32 +281,49 @@
 		/**
 		 * Send a message as the signed-in user.
 		 */
-		function sendMessage(recipientEmailAddress) {
-			var newMessage = {
-				Message: {
-					Subject: 'Microsoft Graph snippets',
-					Body: {
-						ContentType: 'Text',
-						Content: 'You can send an email by making a POST request to /me/microsoft.graph.sendMail.'
-					},
-					ToRecipients: [
-						{
-							EmailAddress: {
-								Address: recipientEmailAddress
-							}
-						}
-					]
-				},
-				SaveToSentItems: true
-			};
+		function sendMessage(recipientEmailAddress) {			
+			var deferred = $q.defer();
 
-			var req = {
-				method: 'POST',
-				url: baseUrl + '/me/microsoft.graph.sendMail',
-				data: newMessage
-			};
+			// First get the email address for the recipient.
+			getMe()
+				.then(function(response) {
+					let me = response.data;
+					let emailAddress = me.mail || me.userPrincipalName;					
 
-			return $http(req);
+					// Then create the message.
+					var newMessage = {
+						Message: {
+							Subject: 'Microsoft Graph Snippets Sample',
+							Body: {
+								ContentType: 'Text',
+								Content: 'You can send an email by making a POST request to /me/sendMail.'
+							},
+							ToRecipients: [
+								{
+									EmailAddress: {
+										Address: emailAddress
+									}
+								}
+							]
+						},
+						SaveToSentItems: true
+					};
+
+					var req = {
+						method: 'POST',
+						url: baseUrl + '/me/sendMail',
+						data: newMessage
+					};
+
+					deferred.resolve($http(req));
+				}, function (error) {
+					deferred.reject({
+						setupError: 'Unable to get user info.',
+						response: error
+					});
+				});
+			
+			return deferred.promise;
 		};
 		
 		/**
@@ -489,35 +531,13 @@
 			return $http(req);
 		};
 
-		return users;
-		}
-})();
+		/**
+		 * Gets the current tenant.
+		 */
+		function getOrganization() {			
+			return $http.get(baseUrl + '/organization');
+		};
 
-// *********************************************************
-//
-// O365-Angular-Microsoft-Graph-Snippets, https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Snippets
-//
-// Copyright (c) Microsoft Corporation
-// All rights reserved.
-//
-// MIT License:
-// Permission is hereby granted, free of charge, to any person obtaining
-// a copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
-//
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-//
-// *********************************************************
+		return users;
+	}
+})();
