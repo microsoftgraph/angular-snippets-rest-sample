@@ -38,7 +38,7 @@ This sample shows how to use the Microsoft Graph API to send email, manage group
 
 5. Under **Platforms**, choose **Add Platform** > **Web**.
 
-6. Make sure the Allow Implicit Flow check box is selected, and enter http://localhost:8080 as the Redirect URI. 
+6. Make sure the **Allow Implicit Flow** check box is selected, and enter *http://localhost:8080* as the Redirect URI. 
 
 7. Choose **Save**.
 
@@ -65,24 +65,32 @@ bower install hello
 
 8. Choose a snippet from the left-hand navigation pane, and then choose the **Run snippet** button. The request and response display in the center pane.
 
-
 ### How the sample affects your data
 
 This sample runs REST commands that create, read, update, or delete data. The sample creates fake entities so that your actual tenant data is unaffected. The sample will leave behind the fake entities that it creates.
 
-<a name="contributing"></a>
-## Contributing ##
+## Code of note
+
+public/scripts/aad.js - Contains HelloJS configuration properties for the Azure AD provider.  
+public/scripts/config.js - Contains the constants used for authentication parameters.  
+public/services/authHelper.js - Initializes the HelloJS provider, calls the login and logout methods exposed by HelloJS, and gets the token from local storage and adds it to the HTTP request.  
+public/services/<resource>Factory.js - Constructs the HTTP requests for Microsoft Graph.  
+public/controllers/mainController.js - Gets snippets from the factories, and parses the responses from Microsoft Graph.
+
+>**Note** The simple authentication and token handling in this project is for sample purposes only. In a production app, you should construct a more robust way of handling authentication, including validation and secure token handling.
+
+## Questions and comments
+
+We'd love to get your feedback about the Microsoft Graph Snippets Sample for AngularJS. You can send your questions and suggestions to us in the [Issues](https://github.com/microsoftgraph/angular-snippets-rest-sample/issues) section of this repository.
+
+For general questions about Microsoft Graph development, connect with us on [Stack Overflow](http://stackoverflow.com/questions/tagged/microsoftgraph). Tag your questions with [MicrosoftGraph].
+
+## Contributing
 
 If you'd like to contribute to this sample, see [CONTRIBUTING.MD](/CONTRIBUTING.md).
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-## Questions and comments
-
-We'd love to get your feedback about the Microsoft Graph API snippets with Angular sample. You can send your questions and suggestions to us in the [Issues](https://github.com/microsoftgraph/angular-snippets-rest-sample/issues) section of this repository.
-
-Your feedback is important to us. Connect with us on [Stack Overflow](http://stackoverflow.com/questions/tagged/microsoftgraph). Tag your questions with [MicrosoftGraph].
-  
 ## Additional resources
 
 * [Microsoft Graph](http://graph.microsoft.io)
