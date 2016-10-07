@@ -15,7 +15,7 @@
 		common.Snippet = Snippet;
 		
 		// Properties
-		common.baseUrl = 'https://graph.microsoft.com/v1.0';
+		common.baseUrl = 'https://microsoftgraph.chinacloudapi.cn/v1.0';
 		
 		// Methods
 		common.guid = guid;

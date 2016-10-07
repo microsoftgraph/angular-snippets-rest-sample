@@ -3,7 +3,4 @@
 *  See LICENSE in the source repository root for complete license information. 
 */
 
-var appId = 'ENTER_YOUR_APP_ID';
-var redirectUrl = "http://localhost:8080";
-var scopes = "user.readwrite mail.read mail.send calendars.readwrite contacts.read files.readwrite";
-var adminScopes = "user.read.all directory.readwrite.all directory.accessasuser.all";
+var clientId = 'ENTER_YOUR_APP_ID';

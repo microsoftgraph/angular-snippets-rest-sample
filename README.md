@@ -1,102 +1,93 @@
-# Microsoft Graph Snippets Sample for AngularJS (REST)
+# Microsoft Graph Snippets Sample for AngularJS
 
-## Table of contents
-
-* [Prerequisites](#prerequisites)
-* [Register the application](#register-the-application)
-* [Build and run the sample](#build-and-run-the-sample)
-* [Code of note](#code-of-note)
-* [Questions and comments](#questions-and-comments)
-* [Contributing](#contributing)
-* [Additional resources](#additional-resources)
-
-This sample shows how to use the Microsoft Graph API to send email, manage groups, and perform other activities. Microsoft Graph exposes multiple APIs from Microsoft cloud services through a single REST API endpoint. This repository shows you how to access multiple resources, including Microsoft Azure Active Directory (AD) and the Office 365 APIs, by making HTTP requests to Microsoft Graph in an AngularJS app. The sample uses the Azure AD v2.0 endpoint, which supports Microsoft Accounts and work or school Office 365 accounts.
+The Microsoft Graph API exposes multiple APIs from Microsoft cloud services through a single REST API endpoint. This repository shows you how to access multiple resources, including Microsoft Azure Active Directory (AD) and the Office 365 APIs, by making HTTP requests to the Microsoft Graph API in an Angular application. 
 
 ![Microsoft Graph Snippets sample screenshot](./README assets/screenshot.jpg)
 
-**Note:** This sample does not always clean up the entities that it creates, so you might want to use a test account to run the sample.
+**Note: If possible, please use this sample with a "non-work" or test account in Office 365. The sample does not clean up the created objects in your mailbox, calendar, contacts, and objects created from additional operations. At this time you'll have to manually remove these artifacts, for example, sample mails, contacts, and calendar events.**  
 
 ## Prerequisites
 
 * [Node.js](https://nodejs.org/). Node is required to run the sample on a development server and to install dependencies. 
+* An Office 365 admin account. You can sign up for [an Office 365 Developer subscription](https://aka.ms/devprogramsignup) that includes the resources that you need to start building Office 365 apps.
 
-* [Bower](https://bower.io). Bower is required to install front-end dependencies.
+     > Note: If you already have a subscription, the previous link sends you to a page with the message *Sorry, you can’t add that to your current account*. In that case use an account from your current Office 365 subscription.
 
-* Either a [Microsoft account](https://www.outlook.com) or [work or school account](http://dev.office.com/devprogram) (admin)
+## Register the app
 
-## Register the application
+1. Sign in to the [Azure portal](https://portal.azure.com/).
+2. On the top bar, click on your account and under the **Directory** list, choose the Active Directory tenant where you wish to register your application.
+3. Click on **More Services** in the left hand nav, and choose **Azure Active Directory**.
+4. Click on **App registrations** and choose **Add**.
+5. Enter a friendly name for the application, for example 'MSGraphSnippetsAngular' and select 'Web app/API' as the **Application Type**. For the Sign-on URL, enter *http://localhost:8080/*. Click on **Create** to create the application.
+6. While still in the Azure portal, choose your application, click on **Settings** and choose **Properties**.
+7. Find the Application ID value and copy it to the clipboard.
+8. Enable your app to use the Implicit grant type.  
+  a. Choose the **Manifest** tab above the app details.  
+  b. Choose **Edit**, and then set the **oauth2AllowImplicitFlow** property to **true**.  
+  c. Choose **Save**.
+9. Configure Permissions for your application:  
+  a. In the **Settings** menu, choose the **Required permissions** section, click on **Add**, then **Select an API**, and select **Microsoft Graph**.  
+  b. Click on Select Permissions. Select the following delegated permissions and then choose **Done**.
 
-1. Sign into the [App Registration Portal](https://apps.dev.microsoft.com/) using either your personal or work or school account.
+   - Read and write access to user profile
+   - Read all user' full profiles
+   - Read and write directory data
+   - Access directory data as the signed in user
+   - Read user mail
+   - Send mail as user
+   - Have full access to user calendars
+   - Read user contacts
+   - Have full access to user files
 
-2. Choose **Add an app**.
+## Configure and run the app
 
-3. Enter a name for the app, and choose **Create application**.
-	
-	The registration page displays, listing the properties of your app.
- 
-4. Copy the application ID. This is the unique identifier for your app that you'll use to configure the sample.
+1. Using your favorite IDE, open **config.js** in *public/scripts*.
+2. Replace *ENTER_YOUR_APP_ID* with the application ID of your registered Azure application.
+3. Install project dependencies with Node's package manager (npm) by running ```npm install``` in the project's root directory on the command line.
+4. Start the development server by running ```node server.js``` in the project's root directory.
+5. Navigate to ```http://localhost:8080/``` in your web browser and sign in to the app using your Office 365 admin credentials.
 
-5. Under **Platforms**, choose **Add Platform** > **Web**.
+## Understanding the app
 
-6. Make sure the **Allow Implicit Flow** check box is selected, and enter *http://localhost:8080* as the Redirect URI. 
+This sample demonstrates several concepts including:
 
-7. Choose **Save**.
+* Learn how to make REST calls that target data stored in Office 365 (including Exchange Online and SharePoint Online).
+* Understand how to use the [Azure Active Directory Authentication Library (ADAL) for JavaScript](https://github.com/AzureAD/azure-activedirectory-library-for-js).
 
-## Build and run the sample
+### Connecting to Office 365
 
-1. Download or clone the Microsoft Graph Snippets Sample for AngularJS.
+The sample provides the code required to display the Office 365 sign in page if there are no tokens available already in the local cache. The sample uses the Azure Active Directory Library for JavaScript to manage the tokens required for the app to use Office 365 services.
 
-2. Using your favorite IDE, open **config.js** in *public/scripts*.
+The code that uses ADAL JS to authenticate with Azure AD is located in the following files (located in *public/*):
 
-3. Replace the **appId** placeholder value with the application ID of your registered Azure application.
+* *scripts/app.js* - The service is configured here.
+* *scripts/controllers/navbarController.js* - The login/logOut methods exposed by ADAL are leveraged here.
 
-4. In a command prompt, run the following commands in the sample's root directory. This installs project dependencies, including the [HelloJS](http://adodson.com/hello.js/) client-side authentication library.
+### Snippets
 
-  ```
-npm install
-bower install hello
-  ```
-  
-5. Run `npm start` to start the development server.
+This sample is a repository of Microsoft Graph API code snippets that demonstrate how to work with Office 365 objects like mail, calendar, contacts, files, and user profile information.
 
-6. Navigate to `http://localhost:8080` in your web browser.
+Each tenant-level resource collection has its own factory defined in *public/services* where you can see how the requests are constructed. Then the factories are called by *mainController.js* found in the *public/controllers* directory.
 
-7. Sign in with your personal or admin work or school account and grant the requested permissions.
-
-8. Choose a snippet from the left-hand navigation pane, and then choose the **Run snippet** button. The request and response display in the center pane.
-
->**Note** Operations that are not supported for Microsoft Accounts are marked with an asterisk.
-
-### How the sample affects your data
-
-This sample runs REST commands that create, read, update, or delete data. The sample creates fake entities so that your actual tenant data is unaffected. The sample will leave behind the fake entities that it creates.
-
-## Code of note
-
-public/scripts/aad.js - Contains HelloJS configuration properties for the Azure AD provider.  
-public/scripts/config.js - Contains the constants used for authentication parameters.  
-public/services/authHelper.js - Initializes the HelloJS provider, calls the login and logout methods exposed by HelloJS, and gets the token from local storage and adds it to the HTTP request.  
-public/services/<resource>Factory.js - Constructs the HTTP requests for Microsoft Graph.  
-public/controllers/mainController.js - Gets snippets from the factories, and parses the responses from Microsoft Graph.
-
->**Note** The simple authentication and token handling in this project is for sample purposes only. In a production app, you should construct a more robust way of handling authentication, including validation and secure token handling.
-
-## Questions and comments
-
-We'd love to get your feedback about the Microsoft Graph Snippets Sample for AngularJS. You can send your questions and suggestions to us in the [Issues](https://github.com/microsoftgraph/angular-snippets-rest-sample/issues) section of this repository.
-
-For general questions about Microsoft Graph development, connect with us on [Stack Overflow](http://stackoverflow.com/questions/tagged/microsoftgraph). Tag your questions with [MicrosoftGraph].
-
-## Contributing
+<a name="contributing"></a>
+## Contributing ##
 
 If you'd like to contribute to this sample, see [CONTRIBUTING.MD](/CONTRIBUTING.md).
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
+## Questions and comments
+
+We'd love to get your feedback about the Microsoft Graph Snippets Sample for AngularJS. You can send your questions and suggestions to us in the [Issues](https://github.com/microsoftgraph/angular-snippets-rest-sample/issues) section of this repository.
+
+Your feedback is important to us. Connect with us on [Stack Overflow](http://stackoverflow.com/questions/tagged/office365+or+microsoftgraph). Tag your questions with [MicrosoftGraph] and [office365].
+  
 ## Additional resources
 
-* [Microsoft Graph](http://graph.microsoft.io)
-* [Other Microsoft Graph samples for AngularJS](https://github.com/microsoftgraph?utf8=%E2%9C%93&query=angular)
+* [Office Dev Center](http://dev.office.com/)
+* [Microsoft Graph API](http://graph.microsoft.io)
+* [Microsoft Graph Snippets Sample for AngularJS](https://github.com/microsoftgraph/angular-connect-rest-sample)
 
 ## Copyright
-Copyright (c) 2016 Microsoft. All rights reserved.
+Copyright (c) 2015 Microsoft. All rights reserved.

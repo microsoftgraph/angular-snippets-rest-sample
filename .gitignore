@@ -1,6 +1,5 @@
 logs/*
 !.gitkeep
-.vscode/
 node_modules/
 bower_components/
 tmp

@@ -1,13 +1,13 @@
 <!--  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license.
         See LICENSE in the source repository root for complete license information. -->
-        
+
 <div class="container-fluid">
-  <div class="row" ng-show="!main.isAuthenticated()">
+  <div class="row" ng-show="!userInfo.isAuthenticated">
     <div class="col-xs-6">
-      <h2 class="lead">Use the button in the navigation bar to connect to Microsoft Graph and explore the Microsoft Graph API using your own data.</h2>
+      <h2 class="lead">Use the button in the navigation bar to connect to Office 365 and explore the Microsoft Graph API against your own tenant.</h2>
     </div>
   </div>
-  <div class="row" ng-show="main.isAuthenticated()">
+  <div class="row" ng-show="userInfo.isAuthenticated">
     <div class="col-sm-3 col-md-3 sidebar">
       <ul class="nav nav-sidebar">
         <li ng-repeat="snippetGroup in main.snippetGroups">
@@ -20,7 +20,7 @@
         </li>
       </ul>
     </div>
-    <div class="col-sm-9 col-md-9 col-sm-offset-3 col-md-offset-3 main" ng-show="main.isAuthenticated()">
+    <div class="col-sm-9 col-md-9 col-sm-offset-3 col-md-offset-3 main" ng-show="userInfo.isAuthenticated">
       <h1 class="page-header">{{ main.activeSnippet.title }}</h1>
       <button class="btn btn-primary ladda-button" ng-click="main.activeSnippet.run()" ladda-button="laddaLoading"
       data-style="expand-right">Run snippet</button>
