@@ -15,30 +15,34 @@ The Microsoft Graph API exposes multiple APIs from Microsoft cloud services thro
 
 ## Register the app
 
-1. Sign in to the [Azure portal](https://portal.azure.com/).
-2. On the top bar, click on your account and under the **Directory** list, choose the Active Directory tenant where you wish to register your application.
-3. Click on **More Services** in the left hand nav, and choose **Azure Active Directory**.
-4. Click on **App registrations** and choose **Add**.
-5. Enter a friendly name for the application, for example 'MSGraphSnippetsAngular' and select 'Web app/API' as the **Application Type**. For the Sign-on URL, enter *http://localhost:8080/*. Click on **Create** to create the application.
-6. While still in the Azure portal, choose your application, click on **Settings** and choose **Properties**.
-7. Find the Application ID value and copy it to the clipboard.
-8. Enable your app to use the Implicit grant type.  
-  a. Choose the **Manifest** tab above the app details.  
-  b. Choose **Edit**, and then set the **oauth2AllowImplicitFlow** property to **true**.  
-  c. Choose **Save**.
-9. Configure Permissions for your application:  
-  a. In the **Settings** menu, choose the **Required permissions** section, click on **Add**, then **Select an API**, and select **Microsoft Graph**.  
-  b. Click on Select Permissions. Select the following delegated permissions and then choose **Done**.
+1.	Sign in to the [Azure Management Portal](http://manage.windowsazure.cn) using your Azure AD credentials.
+2.	Click **Active Directory** on the left menu, then select the directory for your Office 365 developer site.
+3.	On the top menu, click **Applications**.
+4.	Click **Add** from the bottom menu.
+5.	On the **What do you want to do page**, click **Add an application my organization is developing**.
+6.	On the **Tell us about your application page**, select **Web application and/or web API** for type and enter a friendly name for the application.
+7.	Click the arrow icon on the lower-right corner of the page.
+8.	On the **Application information** page, enter **http://127.0.0.1:8080/** for the sign-on and redirect URI values.
+9.	Once the application is successfully added, you'll be taken to the **Quick Start** page for the application. From there, select **Configure** in the top menu.
+10.	Under **permissions to other applications**, select **Add application**. In the dialog box, select the **Microsoft Graph** application. After you return to the application configuration page, select the following Delegated permissions:
 
    - Read and write access to user profile
    - Read all user' full profiles
    - Read and write directory data
    - Access directory data as the signed in user
    - Read user mail
-   - Send mail as user
+   - Send mail as a user
    - Have full access to user calendars
    - Read user contacts
-   - Have full access to user files
+   - Have full access to user files and files shared with user
+
+11.	Copy the value specified for **Client ID** on the **Configure** page.
+12.	Enable your app to use the Implicit grant type.  
+  a. In the bottom menu, choose **Manage Manifest** > **Download Manifest**.  
+  b. Open the manifest file, and set the **oauth2AllowImplicitFlow** property to **true**.
+  c. In the management portal, choose **Manage Manifest** > **Uload Manifest**, and upload the updated manifest file.
+
+13. Click **Save** in the bottom menu.
 
 ## Configure and run the app
 
