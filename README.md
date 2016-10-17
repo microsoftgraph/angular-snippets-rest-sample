@@ -1,4 +1,4 @@
-# Microsoft Graph Snippets Sample for AngularJS
+ # Microsoft Graph Snippets Sample for AngularJS
 
 The Microsoft Graph API exposes multiple APIs from Microsoft cloud services through a single REST API endpoint. This repository shows you how to access multiple resources, including Microsoft Azure Active Directory (AD) and the Office 365 APIs, by making HTTP requests to the Microsoft Graph API in an Angular application. 
 
@@ -39,8 +39,8 @@ The Microsoft Graph API exposes multiple APIs from Microsoft cloud services thro
 11.	Copy the value specified for **Client ID** on the **Configure** page.
 12.	Enable your app to use the Implicit grant type.  
   a. In the bottom menu, choose **Manage Manifest** > **Download Manifest**.  
-  b. Open the manifest file, and set the **oauth2AllowImplicitFlow** property to **true**.
-  c. In the management portal, choose **Manage Manifest** > **Uload Manifest**, and upload the updated manifest file.
+  b. Open the manifest file, and set the **oauth2AllowImplicitFlow** property to **true**.  
+  c. In the management portal, choose **Manage Manifest** > **Upload Manifest**, and upload the updated manifest file.
 
 13. Click **Save** in the bottom menu.
 
