@@ -20,9 +20,7 @@ This sample shows how to use the Microsoft Graph API to send email, manage group
 
 * [Node.js](https://nodejs.org/). Node is required to run the sample on a development server and to install dependencies. 
 
-* [Bower](https://bower.io). Bower is required to install front-end dependencies.
-
-* Either a [Microsoft account](https://www.outlook.com) or [work or school account](http://dev.office.com/devprogram) (admin)
+* Either a [Microsoft account](https://www.outlook.com) or [work or school account](https://dev.office.com/devprogram) (admin)
 
 ## Register the application
 
@@ -50,13 +48,8 @@ This sample shows how to use the Microsoft Graph API to send email, manage group
 
 3. Replace the **appId** placeholder value with the application ID of your registered Azure application.
 
-4. In a command prompt, run the following commands in the sample's root directory. This installs project dependencies, including the [HelloJS](http://adodson.com/hello.js/) client-side authentication library.
+4. In a command prompt, run `npm install` in the sample's root directory. This installs project dependencies, including the [HelloJS](http://adodson.com/hello.js/) client-side authentication library.
 
-  ```
-npm install
-bower install hello
-  ```
-  
 5. Run `npm start` to start the development server.
 
 6. Navigate to `http://localhost:8080` in your web browser.
@@ -73,11 +66,11 @@ This sample runs REST commands that create, read, update, or delete data. The sa
 
 ## Code of note
 
-public/scripts/aad.js - Contains HelloJS configuration properties for the Azure AD provider.  
-public/scripts/config.js - Contains the constants used for authentication parameters.  
-public/services/authHelper.js - Initializes the HelloJS provider, calls the login and logout methods exposed by HelloJS, and gets the token from local storage and adds it to the HTTP request.  
-public/services/<resource>Factory.js - Constructs the HTTP requests for Microsoft Graph.  
-public/controllers/mainController.js - Gets snippets from the factories, and parses the responses from Microsoft Graph.
+[public/scripts/aad.js](./public/scripts/aad.js) - Contains HelloJS configuration properties for the Azure AD provider.  
+[public/scripts/config.js](./public/scripts/config.js) - Contains the constants used for authentication parameters.  
+[public/services/authHelper.js](./public/services/authHelper.js) - Initializes the HelloJS provider, calls the login and logout methods exposed by HelloJS, and gets the token from local storage and adds it to the HTTP request.  
+[public/services/&lt;resource&gt;Factory.js](./public/services) - Constructs the HTTP requests for Microsoft Graph.  
+[public/controllers/mainController.js](./public/controllers/mainController.js) - Gets snippets from the factories, and parses the responses from Microsoft Graph.
 
 >**Note** The simple authentication and token handling in this project is for sample purposes only. In a production app, you should construct a more robust way of handling authentication, including validation and secure token handling.
 
@@ -85,7 +78,7 @@ public/controllers/mainController.js - Gets snippets from the factories, and par
 
 We'd love to get your feedback about the Microsoft Graph Snippets Sample for AngularJS. You can send your questions and suggestions to us in the [Issues](https://github.com/microsoftgraph/angular-snippets-rest-sample/issues) section of this repository.
 
-For general questions about Microsoft Graph development, connect with us on [Stack Overflow](http://stackoverflow.com/questions/tagged/microsoftgraph). Tag your questions with [MicrosoftGraph].
+For general questions about Microsoft Graph development, connect with us on [Stack Overflow](https://stackoverflow.com/questions/tagged/microsoftgraph). Tag your questions with [MicrosoftGraph].
 
 ## Contributing
 
@@ -95,8 +88,8 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 ## Additional resources
 
-* [Microsoft Graph](http://graph.microsoft.io)
+* [Microsoft Graph](https://graph.microsoft.io)
 * [Other Microsoft Graph samples for AngularJS](https://github.com/microsoftgraph?utf8=%E2%9C%93&query=angular)
 
 ## Copyright
-Copyright (c) 2016 Microsoft. All rights reserved.
+Copyright (c) 2017 Microsoft. All rights reserved.

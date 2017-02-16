@@ -409,23 +409,41 @@
 		function downloadFile() {
 			var deferred = $q.defer();
 			
-			createFile()
-				.then(function (response) {
-					var fileId = response.data.id;
+			// createFile()
+			// 	.then(function (response) {
+			// 		var fileId = response.data.id;
 					
-					var req = {
-						method: 'GET',
-						url: baseUrl + '/me/drive/items/' + fileId + '/content'
-					};
+			// 		var req = {
+			// 			method: 'GET',
+			// 			url: baseUrl + '/me/drive/items/' + fileId + '/content'
+			// 		};
 
-					deferred.resolve($http(req));
-				}, function (error) {
-					deferred.reject({
-						setupError: 'Unable to create a file to download.',
-						response: error
-					});
+			// 		deferred.resolve($http(req));
+			// 	}, function (error) {
+			// 		deferred.reject({
+			// 			setupError: 'Unable to create a file to download.',
+			// 			response: error
+			// 		});
+			// 	});
+
+			createFile()
+			.then(function (response) {
+				var req = {
+					method: 'GET',
+					url: response.data['@microsoft.graph.downloadUrl'],
+					headers: {
+						Authorization: undefined,
+						SampleID: undefined
+					}
+				};
+				deferred.resolve($http(req));
+			})
+			.catch(function (error) {
+				deferred.reject({
+					setupError: 'Unable to create a file to download or download the file.',
+					response: error
 				});
-			
+			})
 			return deferred.promise;
 		};
 		
