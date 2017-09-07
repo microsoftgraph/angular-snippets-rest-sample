@@ -12,7 +12,7 @@
 
 This sample shows how to use the Microsoft Graph API to send email, manage groups, and perform other activities. Microsoft Graph exposes multiple APIs from Microsoft cloud services through a single REST API endpoint. This repository shows you how to access multiple resources, including Microsoft Azure Active Directory (AD) and the Office 365 APIs, by making HTTP requests to Microsoft Graph in an AngularJS app. The sample uses the Azure AD v2.0 endpoint, which supports Microsoft Accounts and work or school Office 365 accounts.
 
-![Microsoft Graph Snippets sample screenshot](./README assets/screenshot.jpg)
+![Microsoft Graph Snippets sample screenshot](./README%20assets/screenshot.jpg)
 
 **Note:** This sample does not always clean up the entities that it creates, so you might want to use a test account to run the sample.
 
