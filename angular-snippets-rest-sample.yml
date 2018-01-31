@@ -1,0 +1,21 @@
+### YamlMime:Sample
+sample:
+- name: Microsoft Graph Snippets Sample for AngularJS (REST)
+  path: ''
+  description: Provides a repository of code snippets that use Microsoft Graph to perform common tasks such as sending email, managing groups, and other activities from within an AngularJS app. This sample makes REST calls directly to the Microsoft Graph API, and uses the Azure AD v2.0 endpoint to authenticate personal accounts and work or school accounts.
+  readme: ''
+  generateZip: FALSE
+  isLive: TRUE
+  technologies:
+  - Azure AD
+  - Microsoft Graph
+  azureDeploy: ''
+  author: martellaj
+  platforms: []
+  languages:
+  - JavaScript
+  - Angular.js
+  extensions:
+    products:
+    - Office 365
+    scenarios: []
